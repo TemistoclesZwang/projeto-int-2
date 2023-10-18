@@ -11,9 +11,11 @@
 
 ## III - Diagrama de navegação, rabisco frame e product backlog
 
+<a href="https:/">Diagrama de navegação</a>
+
 <a href="https://github.com/TemistoclesZwang/projeto-int-2/files/13033407/RabiscoFrame_230919_155232.pdf">Rabiscoframe</a>
 
-<a href="https://docs.google.com/spreadsheets/d/1O9sLHspYg7myppAePa-B618w9QWIBSaGnr-wBunGHv8/edit?usp=sharing">falt backlog e product backlog</a>
+<a href="https://docs.google.com/spreadsheets/d/1O9sLHspYg7myppAePa-B618w9QWIBSaGnr-wBunGHv8/edit?usp=sharing">flat backlog e product backlog</a>
 
 
 ## IV - Arquitetura e Modelagem dos dados
