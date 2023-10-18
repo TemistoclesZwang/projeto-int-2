@@ -6,7 +6,7 @@
 ## II - Ferramenta de gerenciamento do projeto:
 
 ### *Trello*
-<p> Pode ser acessado em <a href="https://trello.com/b/Th0W74kS/t%C3%A1-pronto" target="_blank">Quadro de Gestão do Projeto</a></p>
+<p> Pode ser acessado em <a href="https://trello.com/b/Th0W74kS/t%C3%A1-pronto](https://trello.com/invite/b/Th0W74kS/ATTI16648127a9b1e34f42433ee9f6c0734eA845A967/ta-pronto" target="_blank">Quadro de Gestão do Projeto</a></p>
 </p>
 
 ## III - Diagrama de navegação, rabisco frame e product backlog
