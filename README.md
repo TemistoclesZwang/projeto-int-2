@@ -20,7 +20,9 @@
 
 ## IV - Arquitetura e Modelagem dos dados
 
-<a href="https:/">Arquitetura e Modelagem dos dados</a>
+<a href="https://github.com/TemistoclesZwang/projeto-int-2/assets/61996692/901d4a16-e8c6-43a2-8cbe-50150361c3e1">Arquitetura</a>
+
+<a href="https://github.com/TemistoclesZwang/projeto-int-2/assets/61996692/391b354f-f135-474e-80ee-b45d47cf76f3">Modelagem dos dados</a>
 
 ## V - Protótipo de baixa fidelidade
 
@@ -30,7 +32,7 @@
 ## VI - Área que se aplica:
 
 <ul>
-  <li> Redes Sociais </li>
+  <li> Alimentação </li>
 </ul>
 
 ## Membros:
