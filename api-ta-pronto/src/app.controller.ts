@@ -13,6 +13,9 @@ import { User as UserModel, Post as PostModel } from '@prisma/client';
 
 @Controller()
 export class AppController {
+  getHello(): any {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private readonly userService: UserService,
     private readonly postService: PostService,

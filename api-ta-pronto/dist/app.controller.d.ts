@@ -4,6 +4,7 @@ import { User as UserModel, Post as PostModel } from '@prisma/client';
 export declare class AppController {
     private readonly userService;
     private readonly postService;
+    getHello(): any;
     constructor(userService: UserService, postService: PostService);
     getPostById(id: string): Promise<PostModel>;
     getPublishedPosts(): Promise<PostModel[]>;

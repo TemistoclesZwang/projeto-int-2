@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const post_service_1 = require("./post.service");
 let AppController = class AppController {
+    getHello() {
+        throw new Error('Method not implemented.');
+    }
     constructor(userService, postService) {
         this.userService = userService;
         this.postService = postService;
