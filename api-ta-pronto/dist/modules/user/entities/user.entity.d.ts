@@ -1,6 +1,5 @@
 export declare class User {
-    nome: string;
+    name: string;
     email: string;
-    senha: string;
-    prazo: Date;
+    hashSenha: string;
 }

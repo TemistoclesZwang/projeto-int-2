@@ -37,3 +37,4 @@ lerna-debug.log*
 .env
 .bin
 
+api-ta-pronto/src/notes.md

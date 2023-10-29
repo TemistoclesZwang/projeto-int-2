@@ -17,7 +17,7 @@ exports.User = User;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
-], User.prototype, "nome", void 0);
+], User.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
@@ -25,9 +25,5 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
-], User.prototype, "senha", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", Date)
-], User.prototype, "prazo", void 0);
+], User.prototype, "hashSenha", void 0);
 //# sourceMappingURL=user.entity.js.map
