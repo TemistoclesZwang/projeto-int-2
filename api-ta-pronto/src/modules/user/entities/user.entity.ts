@@ -9,6 +9,6 @@ export class User {
   email: string;
 
   @ApiProperty()
-  hashSenha: string;
+  hashPass: string;
 
 }

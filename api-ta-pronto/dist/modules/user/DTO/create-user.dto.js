@@ -29,9 +29,16 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'hash da senha' }),
+    (0, swagger_1.ApiProperty)({ description: 'senha' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "hashSenha", void 0);
+], CreateUserDto.prototype, "password", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Confirmação da senha' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Validate)((value, args) => value === args.object.password),
+    __metadata("design:type", String)
+], CreateUserDto.prototype, "passwordConfirm", void 0);
 //# sourceMappingURL=create-user.dto.js.map

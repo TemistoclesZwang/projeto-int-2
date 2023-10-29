@@ -2,14 +2,42 @@ import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
 import { User } from '../entities/user.entity';
 import { CreateUserDto } from '../DTO/create-user.dto';
+import { v4 as uuid } from 'uuid';
+import bcrypt from "bcrypt";
+
+function generateId():string{
+  return uuid()
+}
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = '123';
+const someOtherPlaintextPassword = 'not_bacon';
+
+function generateHash(){
+bcrypt.genSalt(saltRounds, function(err, salt) {
+  bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+      // Store hash in your password DB.
+      console.log(hash);
+      
+  });
+});
+}
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto): Promise<void> {
-    const { name, email, hashSenha } = createUserDto;
-    await this.usersRepository.create(createUserDto);
+    generateHash()
+    const id = generateId();
+    const hashPass = 'teste'
+    const user = {
+      ...createUserDto,
+      id,
+      hashPass
+    };
+
+    await this.usersRepository.create(user);
   }
 
   async findAll(): Promise<User[]> {

@@ -14,7 +14,7 @@ model User {
   id    String      @id
   email String  @unique
   name  String
-  hashSenha String
+  hashPass String
 }
 
 // model Post {

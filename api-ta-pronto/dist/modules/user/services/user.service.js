@@ -12,13 +12,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const user_repository_1 = require("../repositories/user.repository");
+const uuid_1 = require("uuid");
+function generateId() {
+    return (0, uuid_1.v4)();
+}
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = '123';
+const someOtherPlaintextPassword = 'not_bacon';
+function generateHash() {
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(myPlaintextPassword, salt, function (err, hash) {
+            console.log(hash);
+        });
+    });
+}
 let UsersService = class UsersService {
     constructor(usersRepository) {
         this.usersRepository = usersRepository;
     }
     async create(createUserDto) {
-        const { name, email, hashSenha } = createUserDto;
-        await this.usersRepository.create(createUserDto);
+        generateHash();
+        const id = generateId();
+        const hashPass = 'teste';
+        const user = {
+            ...createUserDto,
+            id,
+            hashPass
+        };
+        await this.usersRepository.create(user);
     }
     async findAll() {
         return this.usersRepository.findAll();

@@ -21,14 +21,14 @@ let UserRepository = class UserRepository {
         this.prisma = prisma;
     }
     async create(user) {
-        const { name, email, hashSenha } = user;
+        const { name, email, hashPass } = user;
         const id = generateId();
         await this.prisma.user.create({
             data: {
                 id,
                 name,
                 email,
-                hashSenha
+                hashPass
             }
         });
     }

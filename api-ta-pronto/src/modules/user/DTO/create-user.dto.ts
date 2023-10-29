@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString, Length, IsNumber, IsDate, IsPositive } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString, Length, IsNumber, IsDate, IsPositive, Validate } from 'class-validator';
 
 export class CreateUserDto {
     @ApiProperty({ description: 'Nome do cliente' })
@@ -13,13 +13,18 @@ export class CreateUserDto {
     @IsString()
     email: string;
 
-    @ApiProperty({ description: 'hash da senha' })
-    //. não pode vir do usuário. Tem que ser gerado pelo back
+    @ApiProperty({ description: 'senha' })
     @IsNotEmpty()
     @IsString()
-
     // @IsNumber()
     // @IsPositive()
-    hashSenha: string;
+    password: string;
+
+    @ApiProperty({ description: 'Confirmação da senha' })
+    @IsNotEmpty()
+    @IsString()
+    @Validate( (value, args) => value === args.object.password )
+    // .valida se a senha é igual a confirmação
+    passwordConfirm: string;
 
 }

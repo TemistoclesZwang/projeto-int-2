@@ -38,3 +38,4 @@ lerna-debug.log*
 .bin
 
 api-ta-pronto/src/notes.md
+*.js
