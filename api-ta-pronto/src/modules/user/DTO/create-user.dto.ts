@@ -1,5 +1,7 @@
+import { JSONSchema } from 'class-validator-jsonschema';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString, Length, IsNumber, IsDate, IsPositive, Validate } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString, Length, IsNumber, IsDate, IsPositive, Validate, ValidationError, ValidateNested } from 'class-validator';
+import { ConfirmPass } from '../decorators/confirmPass-decorator';
 
 export class CreateUserDto {
     @ApiProperty({ description: 'Nome do cliente' })
@@ -20,11 +22,10 @@ export class CreateUserDto {
     // @IsPositive()
     password: string;
 
-    @ApiProperty({ description: 'Confirmação da senha' })
+    @ApiProperty({ description: 'Confirmação da Senha' })
     @IsNotEmpty()
     @IsString()
-    @Validate( (value, args) => value === args.object.password )
-    // .valida se a senha é igual a confirmação
+    @ConfirmPass('password', { message: 'As senhas não são iguais.' }) // Use o decorator customizado
     passwordConfirm: string;
 
 }

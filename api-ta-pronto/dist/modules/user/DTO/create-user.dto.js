@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const confirmPass_decorator_1 = require("../decorators/confirmPass-decorator");
 class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
@@ -35,10 +36,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "password", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Confirmação da senha' }),
+    (0, swagger_1.ApiProperty)({ description: 'Confirmação da Senha' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Validate)((value, args) => value === args.object.password),
+    (0, confirmPass_decorator_1.ConfirmPass)('password', { message: 'As senhas não são iguais.' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "passwordConfirm", void 0);
 //# sourceMappingURL=create-user.dto.js.map
