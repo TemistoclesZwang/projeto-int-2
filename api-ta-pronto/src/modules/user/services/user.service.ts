@@ -11,33 +11,45 @@ function generateId():string{
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = '123';
-const someOtherPlaintextPassword = 'not_bacon';
 
-function generateHash(){
-bcrypt.genSalt(saltRounds, function(err, salt) {
-  bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
-      // Store hash in your password DB.
-      console.log(hash);
-      
+function generateHash(plaintextPassword: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      if (err) {
+        reject(err);
+      }
+      bcrypt.hash(plaintextPassword, salt, (err, hash) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(hash);
+      });
+    });
   });
-});
 }
+
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto): Promise<void> {
-    generateHash()
-    const id = generateId();
-    const hashPass = 'teste'
-    const user = {
-      ...createUserDto,
-      id,
-      hashPass
-    };
+    generateHash(myPlaintextPassword)
+    .then((hash) => {
+      const id = generateId();
+      const user = {
+        ...createUserDto,
+        id,
+        hashPass: hash, 
+      };
 
-    await this.usersRepository.create(user);
+      return this.usersRepository.create(user);
+    })
+    .catch((error) => {
+      console.error('Erro ao gerar o hash:', error);
+    });
+
+
   }
 
   async findAll(): Promise<User[]> {

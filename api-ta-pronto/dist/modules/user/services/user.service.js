@@ -19,11 +19,18 @@ function generateId() {
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = '123';
-const someOtherPlaintextPassword = 'not_bacon';
-function generateHash() {
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(myPlaintextPassword, salt, function (err, hash) {
-            console.log(hash);
+function generateHash(plaintextPassword) {
+    return new Promise((resolve, reject) => {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+            if (err) {
+                reject(err);
+            }
+            bcrypt.hash(plaintextPassword, salt, (err, hash) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(hash);
+            });
         });
     });
 }
@@ -32,15 +39,19 @@ let UsersService = class UsersService {
         this.usersRepository = usersRepository;
     }
     async create(createUserDto) {
-        generateHash();
-        const id = generateId();
-        const hashPass = 'teste';
-        const user = {
-            ...createUserDto,
-            id,
-            hashPass
-        };
-        await this.usersRepository.create(user);
+        generateHash(myPlaintextPassword)
+            .then((hash) => {
+            const id = generateId();
+            const user = {
+                ...createUserDto,
+                id,
+                hashPass: hash,
+            };
+            return this.usersRepository.create(user);
+        })
+            .catch((error) => {
+            console.error('Erro ao gerar o hash:', error);
+        });
     }
     async findAll() {
         return this.usersRepository.findAll();
