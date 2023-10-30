@@ -6,5 +6,7 @@ export declare class UserRepository {
     create(user: User): Promise<void>;
     findAll(): Promise<User[]>;
     findOne(id: string): Promise<User>;
-    remove(id: string): Promise<void>;
+    findEmail(email: string): Promise<User>;
+    update(email: string, newName: string): Promise<User>;
+    remove(email: string): Promise<void>;
 }

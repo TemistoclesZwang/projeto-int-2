@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
 import { User } from '../entities/user.entity';
 import { CreateUserDto } from '../DTO/create-user.dto';
+import { UpdateUserDto } from '../DTO/update-user.dto';
 import { v4 as uuid } from 'uuid';
 import bcrypt from "bcrypt";
 
@@ -47,6 +48,27 @@ export class UsersService {
 
   }
 
+  async update(updateUserDto:UpdateUserDto): Promise<User> {
+    try {
+      const user = await this.usersRepository.findEmail(updateUserDto.email);
+
+      if (!user) {
+        throw new NotFoundException('Usuário não encontrado');
+      }
+
+      const updatedUser = await this.usersRepository.update(updateUserDto.email, updateUserDto.name);
+      return updatedUser;
+
+    } catch (error) {
+      console.error('Erro ao atualizar usuário:', error);
+      throw new InternalServerErrorException('Erro ao atualizar usuário');
+    }
+  }
+
+  async remove(email: string): Promise<void> {
+    return this.usersRepository.remove(email);
+  }
+  
   async findAll(): Promise<User[]> {
     return this.usersRepository.findAll();
   }
@@ -55,11 +77,12 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  // async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-  //   return this.usersRepository.update(id, updateUserDto);
-  // }
-
-  async remove(id: string): Promise<void> {
-    return this.usersRepository.remove(id);
+  async findEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne(email);
   }
+
 }
+
+
+
+

@@ -7,11 +7,6 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-// import { UsersService } from './users.service';
-// import { CreateUserDto } from './dto/create-user.dto';
-// import { UpdateUserDto } from './dto/update-user.dto';
-// import { UsersRepository } from 'src/repositories/users-repository';
-// import { UsersService } from 'src/user.service';
 import { UsersService } from '../services/user.service';
 import { UserRepository } from '../repositories/user.repository';
 import { CreateUserDto } from '../DTO/create-user.dto';
@@ -21,6 +16,7 @@ import {
   ApiResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
+import { UpdateUserDto } from '../DTO/update-user.dto';
 
 @Controller('users')
 @ApiTags('users') // Título das rotas no Swagger
@@ -40,7 +36,24 @@ export class UsersController {
 
     await this.usersService.create(createUserDto);
   }
+
+  @Patch('update')
+  @ApiOperation({ summary: 'Atualiza um user pelo email' })
+  @ApiResponse({ status: 200, description: 'User atualizado com sucesso' })
+  @ApiResponse({ status: 404, description: 'User não encontrado' })
+  update(@Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(updateUserDto);
+  }
+
+  @Delete('deleteAccount/:email')
+  @ApiOperation({ summary: 'Remove um user pelo ID' })
+  @ApiResponse({ status: 200, description: 'User removido com sucesso' })
+  @ApiResponse({ status: 404, description: 'User não encontrado' })
+  remove(@Param('email') email: string) {
+    return this.usersService.remove(email);
+  }
 }
+
 //   @Get('lista')
 //   @ApiOperation({ summary: 'Lista todos os users' })
 //   @ApiResponse({
@@ -59,19 +72,5 @@ export class UsersController {
 //     return this.usersService.findOne(+id);
 //   }
 
-//   @Patch('lista/:id')
-//   @ApiOperation({ summary: 'Atualiza um user pelo ID' })
-//   @ApiResponse({ status: 200, description: 'User atualizado com sucesso' })
-//   @ApiResponse({ status: 404, description: 'User não encontrado' })
-//   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-//     return this.usersService.update(+id, updateUserDto);
-//   }
 
-//   @Delete('lista/:id')
-//   @ApiOperation({ summary: 'Remove um user pelo ID' })
-//   @ApiResponse({ status: 200, description: 'User removido com sucesso' })
-//   @ApiResponse({ status: 404, description: 'User não encontrado' })
-//   remove(@Param('id') id: string) {
-//     return this.usersService.remove(+id);
-//   }
-// }
+

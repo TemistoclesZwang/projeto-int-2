@@ -42,10 +42,34 @@ let UserRepository = class UserRepository {
             },
         });
     }
-    async remove(id) {
+    async findEmail(email) {
+        return this.prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+    }
+    async update(email, newName) {
+        try {
+            const updatedUser = await this.prisma.user.update({
+                where: {
+                    email,
+                },
+                data: {
+                    name: newName,
+                },
+            });
+            return updatedUser;
+        }
+        catch (error) {
+            console.error('Erro ao atualizar usuário:', error);
+            throw new common_1.InternalServerErrorException('Erro ao atualizar usuário');
+        }
+    }
+    async remove(email) {
         await this.prisma.user.delete({
             where: {
-                id,
+                email,
             },
         });
     }

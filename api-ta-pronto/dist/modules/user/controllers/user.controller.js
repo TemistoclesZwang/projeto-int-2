@@ -18,6 +18,7 @@ const user_service_1 = require("../services/user.service");
 const user_repository_1 = require("../repositories/user.repository");
 const create_user_dto_1 = require("../DTO/create-user.dto");
 const swagger_1 = require("@nestjs/swagger");
+const update_user_dto_1 = require("../DTO/update-user.dto");
 let UsersController = class UsersController {
     constructor(usersService, userRepository) {
         this.usersService = usersService;
@@ -25,6 +26,12 @@ let UsersController = class UsersController {
     }
     async create(createUserDto) {
         await this.usersService.create(createUserDto);
+    }
+    update(updateUserDto) {
+        return this.usersService.update(updateUserDto);
+    }
+    remove(email) {
+        return this.usersService.remove(email);
     }
 };
 exports.UsersController = UsersController;
@@ -38,6 +45,26 @@ __decorate([
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)('update'),
+    (0, swagger_1.ApiOperation)({ summary: 'Atualiza um user pelo email' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'User atualizado com sucesso' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'User não encontrado' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [update_user_dto_1.UpdateUserDto]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)('deleteAccount/:email'),
+    (0, swagger_1.ApiOperation)({ summary: 'Remove um user pelo ID' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'User removido com sucesso' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'User não encontrado' }),
+    __param(0, (0, common_1.Param)('email')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "remove", null);
 exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),
     (0, swagger_1.ApiTags)('users'),

@@ -47,14 +47,31 @@ let UsersService = class UsersService {
             console.error('Erro ao gerar o hash:', error);
         });
     }
+    async update(updateUserDto) {
+        try {
+            const user = await this.usersRepository.findEmail(updateUserDto.email);
+            if (!user) {
+                throw new common_1.NotFoundException('Usuário não encontrado');
+            }
+            const updatedUser = await this.usersRepository.update(updateUserDto.email, updateUserDto.name);
+            return updatedUser;
+        }
+        catch (error) {
+            console.error('Erro ao atualizar usuário:', error);
+            throw new common_1.InternalServerErrorException('Erro ao atualizar usuário');
+        }
+    }
+    async remove(email) {
+        return this.usersRepository.remove(email);
+    }
     async findAll() {
         return this.usersRepository.findAll();
     }
     async findOne(id) {
         return this.usersRepository.findOne(id);
     }
-    async remove(id) {
-        return this.usersRepository.remove(id);
+    async findEmail(email) {
+        return this.usersRepository.findOne(email);
     }
 };
 exports.UsersService = UsersService;

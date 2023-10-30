@@ -1,5 +1,5 @@
 // src/user/repositories/prisma-user.repository.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { PrismaService } from 'src/prisma.service';
 import { v4 as uuid } from 'uuid';
@@ -38,10 +38,35 @@ export class UserRepository {
         });
     }
 
-    async remove(id: string): Promise<void> {
+    async findEmail(email: string): Promise<User> {
+        return this.prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+    }
+
+    async update(email: string, newName: string): Promise<User> {
+        try {
+            const updatedUser = await this.prisma.user.update({
+                where: {
+                    email, // Filtro para encontrar o usuário pelo email
+                },
+                data: {
+                    name: newName, 
+                },
+            });
+            return updatedUser;
+        } catch (error) {
+            console.error('Erro ao atualizar usuário:', error);
+            throw new InternalServerErrorException('Erro ao atualizar usuário');
+        }
+    }
+    
+    async remove(email: string): Promise<void> {
         await this.prisma.user.delete({
             where: {
-                id,
+                email,
             },
         });
     }
