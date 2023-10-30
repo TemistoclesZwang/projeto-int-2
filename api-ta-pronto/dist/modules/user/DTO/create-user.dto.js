@@ -20,7 +20,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Nome do cliente' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(5, 32),
+    (0, class_validator_1.Length)(5, 42),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "name", void 0);
 __decorate([

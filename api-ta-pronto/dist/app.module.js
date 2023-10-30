@@ -12,14 +12,26 @@ const user_repository_1 = require("./modules/user/repositories/user.repository")
 const user_service_1 = require("./modules/user/services/user.service");
 const user_controller_1 = require("./modules/user/controllers/user.controller");
 const prisma_service_1 = require("./prisma.service");
+const auth_controller_1 = require("./modules/auth/auth/auth.controller");
+const auth_service_1 = require("./modules/auth/auth/auth.service");
+const jwt_1 = require("@nestjs/jwt");
+const jwt_2 = require("@nestjs/jwt");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        controllers: [user_controller_1.UsersController],
+        imports: [
+            jwt_2.JwtModule.register({
+                secret: 'SuaChaveSecretaAqui',
+                signOptions: { expiresIn: '1d' },
+            }),
+        ],
+        controllers: [user_controller_1.UsersController, auth_controller_1.AuthController],
         providers: [
             user_service_1.UsersService,
+            jwt_1.JwtService,
+            auth_service_1.AuthService,
             prisma_service_1.PrismaService,
             user_repository_1.UserRepository
         ],

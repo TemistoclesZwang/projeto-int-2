@@ -17,20 +17,14 @@ function generateId() {
     return (0, uuid_1.v4)();
 }
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const myPlaintextPassword = '123';
 function generateHash(plaintextPassword) {
     return new Promise((resolve, reject) => {
-        bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(plaintextPassword, 2, (err, hash) => {
             if (err) {
                 reject(err);
             }
-            bcrypt.hash(plaintextPassword, salt, (err, hash) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(hash);
-            });
+            resolve(hash);
         });
     });
 }

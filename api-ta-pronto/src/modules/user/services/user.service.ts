@@ -9,22 +9,17 @@ function generateId():string{
   return uuid()
 }
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const myPlaintextPassword = '123';
 
 function generateHash(plaintextPassword: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    bcrypt.genSalt(saltRounds, (err, salt) => {
-      if (err) {
-        reject(err);
-      }
-      bcrypt.hash(plaintextPassword, salt, (err, hash) => {
+      bcrypt.hash(plaintextPassword, 2, (err, hash) => {
         if (err) {
           reject(err);
         }
         resolve(hash);
       });
-    });
+
   });
 }
 

@@ -7,7 +7,7 @@ export class CreateUserDto {
     @ApiProperty({ description: 'Nome do cliente' })
     @IsNotEmpty()
     @IsString()
-    @Length(5, 32) 
+    @Length(5, 42) 
     name: string;
 
     @ApiProperty({ description: 'Email do cliente' })
