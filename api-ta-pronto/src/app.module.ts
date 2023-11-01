@@ -4,8 +4,8 @@ import { UsersService } from './modules/user/services/user.service';
 import { UsersController } from './modules/user/controllers/user.controller';
 import { PrismaService } from 'src/prisma.service';
 // import { AuthModule } from './modules/auth/auth/auth.module';
-import { AuthController } from './modules/auth/auth/auth.controller';
-import { AuthService } from './modules/auth/auth/auth.service';
+import { AuthController } from './modules/auth/auth.controller';
+import { AuthService } from './modules/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { JwtModule } from '@nestjs/jwt';
 // import {PrismaUse}

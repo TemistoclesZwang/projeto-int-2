@@ -11,6 +11,7 @@ export class AuthController {
   @Post('signin')
   @ApiOperation({ summary: 'Autentica um usuário' })
   @ApiResponse({ status: 200, description: 'Usuário autenticado com sucesso' })
+  @ApiResponse({ status: 404, description: 'User não encontrado' })
   @ApiBadRequestResponse({ description: 'Credenciais inválidas' })
   async signIn(@Body() signInDto: SignInDto) {
     const { id, password } = signInDto;
