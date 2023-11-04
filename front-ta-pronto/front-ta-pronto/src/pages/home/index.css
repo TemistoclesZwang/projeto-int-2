@@ -1,0 +1,297 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 62, 5%;
+}
+
+.secao {
+    margin-left: 2rem;
+}
+
+p {
+    color: aliceblue;
+}
+
+.first,
+.two,
+.three {
+    padding-top: 5rem;
+    height: 60rem;
+    width: 100vw;
+    background-color: white;
+}
+
+
+/* .two {
+    height: 60rem;
+} */
+
+.bar {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    background-color: rgb(21, 39, 33);
+    flex-direction: row;
+    width: 100%;
+    margin-top: -5rem;
+}
+
+.txt-bar {
+    
+    display: none;
+    color: rgb(231, 231, 201);
+}
+
+.left,
+.right {
+    display: flex;
+    gap: 2rem;
+    margin: .5rem;
+}
+
+.my-mark,
+.icon1,
+.icon2,
+.icon3 {
+    background-color: rgb(34, 53, 53);
+    width: 3rem;
+    height: 3rem;
+}
+
+.icon1,
+.icon2,
+.icon3 {
+    border-radius: 3rem;
+}
+
+.conteudo-container {
+    /* margin-top: 5rem; */
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    height: 15rem;
+
+}
+
+.botao-principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 2rem;
+    width: 35rem;
+    height: 25rem;
+    background-color: rgb(246, 246, 239);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.countdown{
+    /* background-color: rgb(151, 151, 151); */
+    /* height: 5rem; */
+    /* width: 15rem; */
+    color: black;
+    font-size: 3rem;
+    border-radius: 2rem;
+}
+
+.detalhesPedido{
+    color: black;
+}
+.img-my-mark{
+    /* componente grayscale */
+    margin-top: 10rem;
+    height: 5rem;
+    width: 5rem;
+}
+
+
+.textos-principais {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo-principal {
+    color: rgb(57, 96, 87);
+}
+
+.two {
+    background-color: rgb(57, 96, 87);
+
+}
+
+.text-imagem-two,
+.image-two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.image-two {
+    height: 20rem;
+    width: 15rem;
+    background-color: rgb(29, 123, 62);
+}
+
+.container-two,
+.container-three {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.content-1,
+.content-2,
+.content-3,
+.content-4 {
+    background-color: #254f41;
+    padding: 2rem;
+}
+
+.text-img-two,
+.text-img-three {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.img-two {
+    width: 10rem;
+    height: 6rem;
+    background-color: #0c941c;
+}
+
+.img-three {
+    width: 100%;
+    height: 15rem;
+    background-color: #69e077;
+    border-radius: 2rem;
+    margin: 0 auto;
+
+}
+
+/* .container-five {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+} */
+
+/* .content-1-five,
+.content-2-five,
+.content-3-five,
+.content-4-five {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+} */
+
+
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav-button {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #f1eded;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-button:nth-child(1) {
+    scroll-snap-align: start;
+}
+
+.nav-button:nth-child(2) {
+    scroll-snap-align: start;
+}
+
+.nav-button:nth-child(3) {
+    scroll-snap-align: start;
+}
+
+.nav-button:nth-child(4) {
+    scroll-snap-align: start;
+}
+
+
+@media screen and (min-width: 790px) {
+
+    .first {
+        height: 40rem;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .two {
+        height: 30rem;
+        background-color: rgb(115, 178, 189);
+    }
+
+    .three {
+        height: 1rem;
+        
+    }
+
+    .txt-bar {
+        display: flex;
+        align-items: center;
+    }
+
+    .my-mark,
+    .icon1,
+    .icon2,
+    .icon3 {
+        /* background-color: rgb(241, 134, 80); */
+        width: 3rem;
+        height: 3rem;
+        border-radius: .5rem;
+    }
+
+    .icon1,
+    .icon2,
+    .icon3 {
+        border-radius: 5rem;
+        width: 3rem;
+        height: 3rem;
+
+    }
+
+
+    .left,
+    .right {
+        display: flex;
+        gap: 1rem;
+        margin: .5rem;
+        margin-left: 2rem;
+        align-items: center;
+    }
+
+    .conteudo-container {
+        align-items: flex-start;
+        margin-left: 2rem;
+
+    }
+
+    .image-two {
+        height: 20rem;
+        width: 55rem;
+        background-color: rgb(29, 123, 62);
+    }
+
+
+    .container-two,
+    .container-three {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
