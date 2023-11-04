@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { GenQrCode } from "../../components/GenQrCode";
 import "./index.css";
 import { GrayscaleFilterImg } from "../../components/GrayscaleFilterImg";
 import { Countdown } from "../../components/CountDown";
