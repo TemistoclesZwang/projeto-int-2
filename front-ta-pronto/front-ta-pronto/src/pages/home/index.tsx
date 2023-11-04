@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import "./index.css";
 import { GrayscaleFilterImg } from "../../components/GrayscaleFilterImg";
 import { Countdown } from "../../components/CountDown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBell,
+  faCartShopping,
+  faRectangleList,
+  faSliders,
+  faUtensils,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function Home() {
   const minutes = 1;
@@ -18,15 +26,19 @@ export function Home() {
         <div className="bar">
           <div className="left">
             <div className="my-mark"></div>
-            <div className="txt-bar">Perfil</div>
-            <div className="icon1"></div>
+            {/* <div className="txt-bar">Home</div> */}
+            <FontAwesomeIcon icon={faUtensils} size="lg" />
             <div className="txt-bar">Pedidos</div>
+            <FontAwesomeIcon icon={faRectangleList} size="lg" />
+            <div className="txt-bar">Cardápio</div>
+            <FontAwesomeIcon icon={faCartShopping} size="lg" />
+            <div className="txt-bar">Pagamento</div>
           </div>
           <div className="right">
-            <div className="icon2"></div>
-            <div className="txt-bar">Configurações</div>
-            <div className="icon3"></div>
+            <FontAwesomeIcon icon={faBell} size="lg" />
             <div className="txt-bar">Notificações</div>
+            <FontAwesomeIcon icon={faSliders} size="lg" />
+            <div className="txt-bar">Configurações</div>
           </div>
         </div>
         <div className="textos-principais">
@@ -35,15 +47,16 @@ export function Home() {
         <div className="conteudo-container">
           <div className="botao-principal">
             <div className="countdown">
-            {!timerEnded ? (
-              <Countdown initialMinutes={minutes} onTimerEnd={handleTimerEnd} />
-            ) : (
-              <div>Tá pronto!</div>
-            )}
+              {!timerEnded ? (
+                <Countdown
+                  initialMinutes={minutes}
+                  onTimerEnd={handleTimerEnd}
+                />
+              ) : (
+                <div>Tá pronto!</div>
+              )}
             </div>
-            <div className="detalhesPedido">
-              Detalhes do pedido:
-            </div>
+            <div className="detalhesPedido">Detalhes do pedido:</div>
             <GrayscaleFilterImg isColored={timerEnded}></GrayscaleFilterImg>
           </div>
         </div>

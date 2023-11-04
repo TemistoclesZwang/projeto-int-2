@@ -30,7 +30,7 @@ p {
     position: fixed;
     z-index: 1000;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
     background-color: rgb(21, 39, 33);
     flex-direction: row;
@@ -44,26 +44,32 @@ p {
     color: rgb(231, 231, 201);
 }
 
-.left,
-.right {
+.right,
+.left{
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 1rem;
     margin: .5rem;
 }
 
-.my-mark,
-.icon1,
-.icon2,
-.icon3 {
+
+.my-mark{
     background-color: rgb(34, 53, 53);
     width: 3rem;
     height: 3rem;
+    border-radius: .5rem;
+
 }
 
 .icon1,
 .icon2,
-.icon3 {
+.icon3,
+.icon4,
+.icon5 {
+    background-color: rgb(34, 53, 53);
     border-radius: 3rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .conteudo-container {
@@ -246,11 +252,8 @@ p {
         align-items: center;
     }
 
-    .my-mark,
-    .icon1,
-    .icon2,
-    .icon3 {
-        /* background-color: rgb(241, 134, 80); */
+    .my-mark{
+        background-color: rgb(241, 134, 80);
         width: 3rem;
         height: 3rem;
         border-radius: .5rem;
@@ -260,8 +263,6 @@ p {
     .icon2,
     .icon3 {
         border-radius: 5rem;
-        width: 3rem;
-        height: 3rem;
 
     }
 
