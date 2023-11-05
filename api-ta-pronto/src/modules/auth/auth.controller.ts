@@ -13,8 +13,9 @@ export class AuthController {
   @ApiResponse({ status: 200, description: 'Usuário autenticado com sucesso' })
   @ApiResponse({ status: 404, description: 'User não encontrado' })
   @ApiBadRequestResponse({ description: 'Credenciais inválidas' })
+  
   async signIn(@Body() signInDto: SignInDto) {
-    const { id, password } = signInDto;
-    return this.authService.signIn(id, password);
+    const { email, password } = signInDto;
+    return this.authService.signIn(email, password);
   }
 }

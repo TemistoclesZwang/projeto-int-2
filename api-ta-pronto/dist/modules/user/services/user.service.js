@@ -71,7 +71,7 @@ let UsersService = class UsersService {
         return this.usersRepository.findOne(id);
     }
     async findEmail(email) {
-        return this.usersRepository.findOne(email);
+        return this.usersRepository.findEmail(email);
     }
 };
 exports.UsersService = UsersService;

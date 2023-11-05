@@ -14,10 +14,12 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
     
-  async signIn(id: string, pass: string): Promise<{ access_token: string }> {
-    const user = await this.usersService.findOne(id);
+  async signIn(email: string, pass: string): Promise<{ access_token: string }> {
+    const user = await this.usersService.findEmail(email);
 
     if (!user) {
+      console.log(user);
+      
       throw new UnauthorizedException('Usuário não encontrado');
     }
     

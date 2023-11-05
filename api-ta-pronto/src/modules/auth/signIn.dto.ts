@@ -4,8 +4,8 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class SignInDto {
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ description: 'ID do usuário' })
-    id: string;
+    @ApiProperty({ description: 'Email do usuário' })
+    email: string;
 
     @IsNotEmpty()
     @IsString()
