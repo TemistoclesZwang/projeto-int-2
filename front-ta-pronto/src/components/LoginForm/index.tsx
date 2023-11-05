@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 interface LoginFormProps {
   onLogin: (id: string, password: string) => void;
@@ -7,7 +8,13 @@ interface LoginFormProps {
 export function LoginForm({ onLogin }: LoginFormProps) {
   const [id, setid] = useState('');
   const [password, setPassword] = useState('');
+  
+  const {login} = useAuth()
+  const { isLoggedIn } = useAuth();
 
+  const handleLogin = () => {
+    login();
+  };
   async function postData() {
     try {
       const response = await fetch('http://localhost:3000/auth/signin', {
@@ -20,6 +27,8 @@ export function LoginForm({ onLogin }: LoginFormProps) {
           password,
         }),
       });
+      
+
       // const data = await response.json();
       // console.log(data);
     } catch (error) {
@@ -31,6 +40,8 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     e.preventDefault();
     onLogin(id, password);
     postData();
+    handleLogin()
+    console.log(isLoggedIn);
   }
 
   return (

@@ -24,7 +24,7 @@ function App() {
         <nav>
           <ul className="links">
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/LoginPage">Login</Link>
             </li>
             <li>
               <Link to="/register">Cadastrar</Link>

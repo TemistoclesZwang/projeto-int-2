@@ -6,28 +6,30 @@ import { NotFound } from "../pages/NotFound";
 import { About } from "../pages/About";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 
+interface PrivateRouteProps {
+  element: React.ReactNode;
+}
 
-interface PrivateRouteProps{
-    element: React.ReactNode;
+export function PrivateRoute({ element }: PrivateRouteProps) {
+  const { isLoggedIn } = useAuth();
+
+  if (isLoggedIn) {
+    return element;
   }
-  
-  export function PrivateRoute({ element }: PrivateRouteProps) {
-    const { isLoggedIn } = useAuth();
-  
-    if (isLoggedIn) {
-      return <Route element={element} />;
-    }
-  
-    return <Navigate to="/login" />;
-  }
+
+  return <Navigate to="/LoginPage" />;
+}
 
 export const MyRouter = (
   <AuthProvider>
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <PrivateRoute element={<About />} />
+      <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
       <Route path="*" element={<NotFound />} />
+      <Route
+        path="/about/*"
+        element={<PrivateRoute element={<About />} />}
+      />
     </Routes>
   </AuthProvider>
 );
