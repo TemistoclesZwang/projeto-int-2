@@ -1,7 +1,0 @@
-- [ ] botão de logout
-- [ ] procurar estrutura de pastas react clean
-- [ ] hover nos menus
-- [ ] organizar rotas
-- [ ] criar context com valores globais para serem usados em qualquer componente
-  - [ ] criar context para cliente e funcionário
-- [ ] switch navigation bar, fixar independente da rota
