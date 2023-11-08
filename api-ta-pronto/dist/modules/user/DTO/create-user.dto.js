@@ -42,4 +42,10 @@ __decorate([
     (0, confirmPass_decorator_1.ConfirmPass)('password', { message: 'As senhas não são iguais.' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "passwordConfirm", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tipo de usuário' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUserDto.prototype, "typeUser", void 0);
 //# sourceMappingURL=create-user.dto.js.map

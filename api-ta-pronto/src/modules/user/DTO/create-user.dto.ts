@@ -28,4 +28,9 @@ export class CreateUserDto {
     @ConfirmPass('password', { message: 'As senhas não são iguais.' }) // Use o decorator customizado
     passwordConfirm: string;
 
+    @ApiProperty({ description: 'Tipo de usuário' })
+    @IsNotEmpty()
+    @IsString()
+    typeUser: string;
+
 }

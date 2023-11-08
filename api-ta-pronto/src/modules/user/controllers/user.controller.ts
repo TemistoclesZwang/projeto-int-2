@@ -29,11 +29,10 @@ export class UsersController {
   @Post('novo')
   @ApiOperation({ summary: 'Cria um novo user' }) // Descrição do endpoint
   @ApiResponse({ status: 201, description: 'User criado com sucesso' })
+  @ApiResponse({ status: 404, description: 'User não foi criado' })
   @ApiBadRequestResponse({ description: 'Requisição inválida' })
+  
   async create(@Body() createUserDto: CreateUserDto) {
-    // Converta a string de prazo em um objeto Date
-    // createUserDto.prazo = new Date(createUserDto.prazo);
-
     await this.usersService.create(createUserDto);
   }
 

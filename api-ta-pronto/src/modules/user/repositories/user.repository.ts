@@ -14,14 +14,15 @@ export class UserRepository {
     constructor(private readonly prisma: PrismaService) { }
 
     async create(user: User): Promise<void> {
-        const {name,email,hashPass} = user;
+        const {name,email,hashPass,typeUser} = user;
         const id = generateId();
         await this.prisma.user.create({
             data: {
                 id,
                 name,
                 email,
-                hashPass
+                hashPass,
+                typeUser
             }
         });
     }

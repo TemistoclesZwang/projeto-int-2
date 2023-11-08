@@ -26,4 +26,8 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], User.prototype, "hashPass", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], User.prototype, "typeUser", void 0);
 //# sourceMappingURL=user.entity.js.map

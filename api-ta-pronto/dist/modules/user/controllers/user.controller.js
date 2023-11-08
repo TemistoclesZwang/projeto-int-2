@@ -39,6 +39,7 @@ __decorate([
     (0, common_1.Post)('novo'),
     (0, swagger_1.ApiOperation)({ summary: 'Cria um novo user' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'User criado com sucesso' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'User não foi criado' }),
     (0, swagger_1.ApiBadRequestResponse)({ description: 'Requisição inválida' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

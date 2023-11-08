@@ -15,6 +15,7 @@ model User {
   email String  @unique
   name  String
   hashPass String
+  typeUser String @default("cliente")
 }
 
 // model Post {
