@@ -17,6 +17,10 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true
+      },
+      
+      "code-runner.executorMap": {
+        "typescript": "ts-node"
       }
     
       
