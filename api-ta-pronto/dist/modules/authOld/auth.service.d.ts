@@ -1,9 +1,10 @@
-import { UsersService } from '../user/services/user.service';
+import { UsersService } from 'src/modules/user/services/user.service';
 import { JwtService } from '@nestjs/jwt';
 export declare class AuthService {
     private usersService;
     private jwtService;
-    private readonly secretOrPrivateKey;
     constructor(usersService: UsersService, jwtService: JwtService);
-    signIn(email: string, pass: string): Promise<any>;
+    signIn(email: string, pass: string): Promise<{
+        access_token: string;
+    }>;
 }
