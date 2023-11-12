@@ -11,11 +11,13 @@ import { AuthService } from './modules/auth/auth.service';
 import { OrderModule } from './modules/order/order.module';
 import { JwtService } from '@nestjs/jwt';
 import { JwtModule } from '@nestjs/jwt';
+import { MenuModule } from './modules/menu/menu.module';
 // import {PrismaUse}
 
 @Module({
   imports: [
     OrderModule,
+    MenuModule,
   //   JwtModule.register({
   //     secret: 'SuaChaveSecretaAqui',
   //     signOptions: { expiresIn: '1d' },

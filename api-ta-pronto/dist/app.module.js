@@ -16,6 +16,7 @@ const auth_controller_1 = require("./modules/auth/auth.controller");
 const auth_service_1 = require("./modules/auth/auth.service");
 const order_module_1 = require("./modules/order/order.module");
 const jwt_1 = require("@nestjs/jwt");
+const menu_module_1 = require("./modules/menu/menu.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -23,6 +24,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             order_module_1.OrderModule,
+            menu_module_1.MenuModule,
         ],
         controllers: [user_controller_1.UsersController, auth_controller_1.AuthController],
         providers: [

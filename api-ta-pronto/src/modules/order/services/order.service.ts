@@ -42,21 +42,24 @@ export class OrderService {
     const dateHourOrder = getCurrentDateTimeString();
     const user = await this.usersRepository.findEmail(createOrderDto.email);
     const orderStatus = createOrderDto.orderStatus
-
-    const id = user.id; 
+    const menuId = createOrderDto.menuId
+    const userId = user.id; 
+    
     const order = {
       orderId,
       user,
-      id,
+      userId,
+      menuId,
       dateHourOrder,
       orderStatus,
     };
+    // await this.usersRepository.addOrderToUser(id, orderId);
     return this.orderRepository.create(order);
   }
 
-    async findByUserId(userId: string): Promise<Order[]> {
-    return this.orderRepository.findByUserId(userId);
-  }
+    // async findAll(): Promise<User[]> {
+  //   return this.usersRepository.findAll();
+  // }
 
   // async update(updateUserDto: UpdateUserDto): Promise<User> {
   //   try {

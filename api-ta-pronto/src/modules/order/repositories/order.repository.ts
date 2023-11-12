@@ -13,14 +13,16 @@ export class OrderRepository {
   {}
 
   async create(order: Order): Promise<void> {
-    const { orderId, user, dateHourOrder, orderStatus } = order;
-    const teste = 'testando'
+    const { orderId, userId,menuId, dateHourOrder, orderStatus } = order;
     try {
       await this.prisma.order.create({
         data: {
           orderId,
-          user: { 
-            connect: { id: user.id },//.não deveria ser o usuário todo a ser passado?
+          user: {
+            connect: { id: userId },
+          },
+          menu: {
+            connect: { menuId: menuId },
           },
           dateHourOrder,
           orderStatus,
@@ -30,28 +32,27 @@ export class OrderRepository {
     } catch (error) {
       throw new InternalServerErrorException('Erro ao criar o pedido.');
     }
-
   }
-  async findByUserId(userId: string): Promise<Order[]> {
-    const orders = await this.prisma.order.findMany({
-      where: {
-        userId,
-      },
-    });
+  // async findByUserId(userId: string): Promise<Order[]> {
+  //   const orders = await this.prisma.order.findMany({
+  //     where: {
+  //       userId,
+  //     },
+  //   });
   
-    const convertedOrders: Order[] = orders.map((order) => {
-      return {
-        // id: order.id,
-        // user: order.user,
-        userId: order.userId,
-        orderId: order.orderId,
-        dateHourOrder: order.dateHourOrder,
-        orderStatus: order.orderStatus,
-      };
-    });
+  //   const convertedOrders: Order[] = orders.map((order) => {
+  //     return {
+  //       // id: order.id,
+  //       // user: order.user,
+  //       userId: order.userId,
+  //       orderId: order.orderId,
+  //       dateHourOrder: order.dateHourOrder,
+  //       orderStatus: order.orderStatus,
+  //     };
+  //   });
   
-    return convertedOrders;
-  }
+  //   return convertedOrders;
+  // }
 
 // .!testar update e remove
   // async update(orderId: string, updatedOrder: Order): Promise<void> {

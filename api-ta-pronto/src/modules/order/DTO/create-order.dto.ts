@@ -15,4 +15,11 @@ export class CreateOrderDto {
     @IsNotEmpty()
     @IsString()
     email: string;
+
+    @ApiProperty({ description: 'Id do prato escolhido no pedido' })
+    @IsNotEmpty()
+    @IsString()
+    menuId: string;
+
+    
 }
