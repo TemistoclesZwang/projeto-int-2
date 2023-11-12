@@ -25,7 +25,8 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Credenciais inválidas');
     }
-
+    console.log('user retornado pelo findemail:',user);
+    
     const payload = { sub: user.email };
     return {
       access_token: await this.jwtService.sign(payload, {

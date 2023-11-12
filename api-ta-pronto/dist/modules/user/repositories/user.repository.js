@@ -33,6 +33,21 @@ let UserRepository = class UserRepository {
             }
         });
     }
+    async addOrderToUser(userId, orderId) {
+        try {
+            await this.prisma.user.update({
+                where: { id: userId },
+                data: {
+                    orders: {
+                        connect: [{ orderId }],
+                    },
+                },
+            });
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Erro ao adicionar pedido ao usuário.');
+        }
+    }
     async findAll() {
         return this.prisma.user.findMany();
     }

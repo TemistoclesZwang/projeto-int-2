@@ -1,5 +1,5 @@
 // src/user/repositories/prisma-user.repository.ts
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { PrismaService } from 'src/prisma.service';
 import { v4 as uuid } from 'uuid';
@@ -27,6 +27,30 @@ export class UserRepository {
         });
     }
 
+    async addOrderToUser(userId: string, orderId: string): Promise<void> {
+        const userExists = await this.prisma.user.findUnique({
+            where: { id: userId },
+        });
+    
+        if (!userExists) {
+            throw new NotFoundException('Usuário não encontrado.');
+        }
+    
+        try {
+            await this.prisma.user.update({
+                where: { id: userId },
+                data: {
+                    orders: {
+                        connect: [{ orderId }],
+                    },
+                },
+            });
+        } catch (error) {
+            throw new InternalServerErrorException('Erro ao adicionar pedido ao usuário.');
+        }
+    }
+    
+      
     async findAll(): Promise<User[]> {
         return this.prisma.user.findMany();
     }

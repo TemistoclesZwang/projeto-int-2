@@ -14,12 +14,16 @@ const user_controller_1 = require("./modules/user/controllers/user.controller");
 const prisma_service_1 = require("./prisma.service");
 const auth_controller_1 = require("./modules/auth/auth.controller");
 const auth_service_1 = require("./modules/auth/auth.service");
+const order_module_1 = require("./modules/order/order.module");
 const jwt_1 = require("@nestjs/jwt");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
+        imports: [
+            order_module_1.OrderModule,
+        ],
         controllers: [user_controller_1.UsersController, auth_controller_1.AuthController],
         providers: [
             user_service_1.UsersService,

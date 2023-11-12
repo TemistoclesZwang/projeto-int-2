@@ -8,17 +8,19 @@ import { PrismaService } from 'src/prisma.service';
 // import { AuthService } from './modules/authOld/auth.service';
 import { AuthController } from './modules/auth/auth.controller';
 import { AuthService } from './modules/auth/auth.service';
+import { OrderModule } from './modules/order/order.module';
 import { JwtService } from '@nestjs/jwt';
 import { JwtModule } from '@nestjs/jwt';
 // import {PrismaUse}
 
 @Module({
-  // imports: [
+  imports: [
+    OrderModule,
   //   JwtModule.register({
   //     secret: 'SuaChaveSecretaAqui',
   //     signOptions: { expiresIn: '1d' },
   //   }),
-  // ],
+  ],
   controllers: [UsersController,AuthController],
   providers: [
     UsersService,
