@@ -23,18 +23,17 @@ model Order {
   orderId           String      @id
   user         User        @relation(fields: [userId], references: [id])
   userId       String
-  // menuId       String
-  // menu         Menu        @relation(fields: [menuId], references: [id])
+  menuId       String?
+  menu         Menu?        @relation(fields: [menuId], references: [menuId])
   dateHourOrder String
   orderStatus       String
 }
 
-// model Menu {
-//   menuId           String      @id
-//   nome         String
-//   ingredientes String []
-//   descricao    String
-//   preco        Float
-//   // orders       Order[]
-  
-// }
+model Menu {
+  menuId       String      @id
+  nome         String
+  ingredientes String
+  descricao    String
+  preco        Float
+  orders       Order[]
+}

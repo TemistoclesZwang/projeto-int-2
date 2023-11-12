@@ -1,6 +1,9 @@
 {
   "name": "api-ta-pronto",
   "version": "0.0.1",
+  "prisma": {
+    "seed": "ts-node src/database/prisma/seed/menuSeed.ts"
+  },
   "description": "",
   "author": "",
   "private": true,
