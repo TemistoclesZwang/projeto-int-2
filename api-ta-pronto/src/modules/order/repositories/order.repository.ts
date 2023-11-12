@@ -1,5 +1,5 @@
 // src/user/repositories/prisma-user.repository.ts
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Order } from '../entities/order.entity';
 import { PrismaService } from 'src/prisma.service';
 import { v4 as uuid } from 'uuid';
@@ -7,69 +7,75 @@ import { UserRepository } from 'src/modules/user/repositories/user.repository';
 
 @Injectable()
 export class OrderRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService,
+    private readonly usersRepository: UserRepository
+    ) 
+  {}
 
   async create(order: Order): Promise<void> {
     const { orderId, user, dateHourOrder, orderStatus } = order;
-
+    const teste = 'testando'
     try {
       await this.prisma.order.create({
         data: {
           orderId,
-          user: {
-            connect: { id: user.id },
+          user: { 
+            connect: { id: user.id },//.não deveria ser o usuário todo a ser passado?
           },
           dateHourOrder,
           orderStatus,
         },
       });
+
     } catch (error) {
       throw new InternalServerErrorException('Erro ao criar o pedido.');
     }
+
+  }
+  async findByUserId(userId: string): Promise<Order[]> {
+    const orders = await this.prisma.order.findMany({
+      where: {
+        userId,
+      },
+    });
+  
+    const convertedOrders: Order[] = orders.map((order) => {
+      return {
+        // id: order.id,
+        // user: order.user,
+        userId: order.userId,
+        orderId: order.orderId,
+        dateHourOrder: order.dateHourOrder,
+        orderStatus: order.orderStatus,
+      };
+    });
+  
+    return convertedOrders;
   }
 
-  // async findAll(): Promise<User[]> {
-  //     return this.prisma.user.findMany();
-  // }
-
-  // async findOne(id: string): Promise<User> {
-  //     return this.prisma.user.findUnique({
-  //         where: {
-  //             id,
-  //         },
+// .!testar update e remove
+  // async update(orderId: string, updatedOrder: Order): Promise<void> {
+  //   try {
+  //     await this.prisma.order.update({
+  //       where: { orderId },
+  //       data: {
+  //         dateHourOrder: updatedOrder.dateHourOrder,
+  //         orderStatus: updatedOrder.orderStatus,
+  //       },
   //     });
+  //   } catch (error) {
+  //     throw new InternalServerErrorException('Erro ao atualizar o pedido.');
+  //   }
   // }
 
-  // async findEmail(email: string): Promise<User> {
-  //     return this.prisma.user.findUnique({
-  //         where: {
-  //             email,
-  //         },
+  // async remove(orderId: string): Promise<void> {
+  //   try {
+  //     await this.prisma.order.delete({
+  //       where: { orderId },
   //     });
-  // }
-
-  // async update(email: string, newName: string): Promise<User> {
-  //     try {
-  //         const updatedUser = await this.prisma.user.update({
-  //             where: {
-  //                 email, // Filtro para encontrar o usuário pelo email
-  //             },
-  //             data: {
-  //                 name: newName,
-  //             },
-  //         });
-  //         return updatedUser;
-  //     } catch (error) {
-  //         console.error('Erro ao atualizar usuário:', error);
-  //         throw new InternalServerErrorException('Erro ao atualizar usuário');
-  //     }
-  // }
-
-  // async remove(email: string): Promise<void> {
-  //     await this.prisma.user.delete({
-  //         where: {
-  //             email,
-  //         },
-  //     });
+  //   } catch (error) {
+  //     throw new NotFoundException('Pedido não encontrado.');
+  //   }
   // }
 }
+

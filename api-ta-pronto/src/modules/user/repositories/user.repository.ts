@@ -27,7 +27,7 @@ export class UserRepository {
         });
     }
 
-    async addOrderToUser(userId: string, orderId: string): Promise<void> {
+    async addOrderToUser(userId: string, orderId: string): Promise<void> { //! não funciona
         const userExists = await this.prisma.user.findUnique({
             where: { id: userId },
         });

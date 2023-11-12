@@ -4,8 +4,8 @@ import { User } from '@prisma/client';
 
 export class Order {
 
-  id: string
-  user: User
+  id?: string //. retirar essas duas variáveis
+  user?: User
   orderId: string  
   // userId: User.id vai ser acessado através do User
   // menuId: string vai ser acessado através do Menu

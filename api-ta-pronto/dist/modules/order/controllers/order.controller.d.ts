@@ -6,4 +6,5 @@ export declare class OrderController {
     private orderRepository;
     constructor(orderService: OrderService, orderRepository: OrderRepository);
     create(createOrderDto: CreateOrderDto): Promise<void>;
+    findOne(userId: string): Promise<import("../entities/order.entity").Order[]>;
 }

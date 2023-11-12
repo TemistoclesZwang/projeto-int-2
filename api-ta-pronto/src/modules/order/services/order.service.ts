@@ -51,8 +51,11 @@ export class OrderService {
       dateHourOrder,
       orderStatus,
     };
-    await this.usersRepository.addOrderToUser(id, orderId);
     return this.orderRepository.create(order);
+  }
+
+    async findByUserId(userId: string): Promise<Order[]> {
+    return this.orderRepository.findByUserId(userId);
   }
 
   // async update(updateUserDto: UpdateUserDto): Promise<User> {

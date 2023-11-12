@@ -13,10 +13,12 @@ model User {
   name        String
   hashPass     String
   typeUser     String @default("cliente")
-  orders       Order[] // .quando um novo pedido é feito o User tem que receber um update com o pedido
+  orders       Order[]
 }
+// .quando um novo pedido é feito o User tem que receber um update com o pedido
 //. o problema é que para gerar a tabela order preciso do tipo usuario
 //. e para gerar a tabela User, preciso modificar a entidade para ter orders[]
+
 model Order {
   orderId           String      @id
   user         User        @relation(fields: [userId], references: [id])
@@ -28,7 +30,7 @@ model Order {
 }
 
 // model Menu {
-//   id           String      @id
+//   menuId           String      @id
 //   nome         String
 //   ingredientes String []
 //   descricao    String

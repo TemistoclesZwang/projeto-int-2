@@ -34,6 +34,12 @@ let UserRepository = class UserRepository {
         });
     }
     async addOrderToUser(userId, orderId) {
+        const userExists = await this.prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!userExists) {
+            throw new common_1.NotFoundException('Usuário não encontrado.');
+        }
         try {
             await this.prisma.user.update({
                 where: { id: userId },

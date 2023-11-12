@@ -36,6 +36,14 @@ export class OrderController {
   async create(@Body() createOrderDto: CreateOrderDto) {
     await this.orderService.create(createOrderDto);
   }
+
+  @Get('orders/:userId')
+  @ApiOperation({ summary: 'Retorna todos os pedidos através do ID do usuário' })
+  @ApiResponse({ status: 200, description: 'Pedido retornado com sucesso' })
+  @ApiResponse({ status: 404, description: 'Pedido não encontrado' })
+  findOne(@Param('userId') userId: string) {
+    return this.orderService.findByUserId(userId);
+  }
 }
 
 //   @Patch('update')
