@@ -16,17 +16,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "[!s]*/**": true,
-        "s[!r]*/**": true,
-        "sr[!c]*/**": true,
-        "src/[!m]*/**": true,
-        "src/m[!o]*/**": true,
-        "src/mo[!d]*/**": true,
-        "src/mod[!u]*/**": true,
-        "src/modu[!l]*/**": true,
-        "src/modul[!e]*/**": true,
-        "src/module[!s]*/**": true
+        "**/Thumbs.db": true
       },
       
       "code-runner.executorMap": {

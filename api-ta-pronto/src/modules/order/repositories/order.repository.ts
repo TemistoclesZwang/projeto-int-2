@@ -33,26 +33,29 @@ export class OrderRepository {
       throw new InternalServerErrorException('Erro ao criar o pedido.');
     }
   }
-  // async findByUserId(userId: string): Promise<Order[]> {
-  //   const orders = await this.prisma.order.findMany({
-  //     where: {
-  //       userId,
-  //     },
-  //   });
   
-  //   const convertedOrders: Order[] = orders.map((order) => {
-  //     return {
-  //       // id: order.id,
-  //       // user: order.user,
-  //       userId: order.userId,
-  //       orderId: order.orderId,
-  //       dateHourOrder: order.dateHourOrder,
-  //       orderStatus: order.orderStatus,
-  //     };
-  //   });
+
+  async findByUserId(userId: string): Promise<Order[]> {
+    const orders = await this.prisma.order.findMany({
+      where: {
+        userId,
+      },
+    });
   
-  //   return convertedOrders;
-  // }
+    const convertedOrders: Order[] = orders.map((order) => {
+      return {
+        // id: order.id,
+        // user: order.user,
+        userId: order.userId,
+        orderId: order.orderId,
+        menuId: order.menuId,
+        dateHourOrder: order.dateHourOrder,
+        orderStatus: order.orderStatus,
+      };
+    });
+  
+    return convertedOrders;
+  }
 
 // .!testar update e remove
   // async update(orderId: string, updatedOrder: Order): Promise<void> {

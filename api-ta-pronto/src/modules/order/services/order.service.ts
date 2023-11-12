@@ -44,7 +44,7 @@ export class OrderService {
     const orderStatus = createOrderDto.orderStatus
     const menuId = createOrderDto.menuId
     const userId = user.id; 
-    
+
     const order = {
       orderId,
       user,
@@ -55,6 +55,10 @@ export class OrderService {
     };
     // await this.usersRepository.addOrderToUser(id, orderId);
     return this.orderRepository.create(order);
+  }
+
+  async findByUserId(userId: string): Promise<Order[]> {
+    return this.orderRepository.findByUserId(userId);
   }
 
     // async findAll(): Promise<User[]> {
