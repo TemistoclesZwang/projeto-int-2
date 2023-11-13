@@ -1,41 +1,44 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import "./App.css";
-// import LoginForm from './components/LoginForm'
-import { LoginPage } from "./pages/Login";
-import { RegistrationPage } from "./pages/Registration";
-import { Home } from "./pages/homeClient";
-import { GrayscaleFilterImg } from "./components/GrayscaleFilterImg";
-import { Countdown } from "./components/CountDown";
-import { useState } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { MyRouter } from "./routes";
+import {
+  faBell,
+  faCartShopping,
+  faRectangleList,
+  faSliders,
+  faUtensils,
+} from "@fortawesome/free-solid-svg-icons";
+import { BtnNavBar } from "./components/BtnNavBar";
+import { GenQrCode } from "./components/GenQrCode";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* <LoginPage></LoginPage> */}
-      {/* <RegistrationPage></RegistrationPage> */}
-      {/* <Home></Home> */}
-      <BrowserRouter>
-        <nav>
+          <BrowserRouter>
+        <nav className="navbar">
           <ul className="links">
-            <li>
-              <Link to="/LoginPage">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Cadastrar</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
+            <div className="left">
+              <BtnNavBar to="/Pedidos" icon={faUtensils} text="Pedidos" />
+              <BtnNavBar to="/cardapio" icon={faRectangleList} text="Cardápio" />
+              <BtnNavBar to="/pagamento" icon={faCartShopping} text="Pagamento" />
+            </div>
+            <div className="right">
+            <BtnNavBar to="/LoginPage" icon={faBell} text="Notificações" />
+            <BtnNavBar to="/register" icon={faSliders} text="Configurações" />
+            </div>
           </ul>
         </nav>
-      {MyRouter}
+        {MyRouter}
       </BrowserRouter>
+      {/* <LoginPage></LoginPage> */}
+      {/* <RegistrationPage></RegistrationPage> */}
+      {/* <Pedidos></Pedidos> */}
+      {/* <Menu></Menu> */}
+      {/* <GenQrCode></GenQrCode> */}
+
+
     </>
   );
 }

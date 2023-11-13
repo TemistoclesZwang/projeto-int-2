@@ -1,4 +1,6 @@
 import React from 'react';
+import "./index.css";
+
 import {LoginForm} from '../../components/LoginForm';
 
 export function LoginPage() {
@@ -8,7 +10,7 @@ export function LoginPage() {
   };
 
   return (
-    <div>
+    <div className='containerLogin'>
       <h1>Login Page</h1>
       <LoginForm onLogin={handleLogin} />
     </div>

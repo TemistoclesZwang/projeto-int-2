@@ -5,7 +5,9 @@ import { RegistrationPage } from "../pages/Registration";
 import { NotFound } from "../pages/NotFound";
 import { About } from "../pages/About";
 import { AuthProvider, useAuth } from "../context/AuthContext";
-
+import { Menu } from "../pages/Menu";
+import { Pedidos } from "../pages/Pedidos";
+import { Pay } from "../pages/Pay";
 interface PrivateRouteProps {
   element: React.ReactNode;
 }
@@ -25,6 +27,9 @@ export const MyRouter = (
     <Routes>
       <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
+      <Route path="/cardapio/*" element={<Menu />} />
+      <Route path="/pedidos/*" element={<Pedidos />} />
+      <Route path="/pagamento/*" element={<Pay />} />
       <Route path="*" element={<NotFound />} />
       <Route
         path="/about/*"

@@ -19,7 +19,7 @@ export function Countdown({ initialMinutes, onTimerEnd }: CountdownProps) {
         } else {
           if (minutes > 0) {
             setMinutes(minutes - 1);
-            setSeconds(59);
+            setSeconds(9);
           } else {
             clearInterval(interval);
             onTimerEnd();

@@ -1,0 +1,87 @@
+p{
+    margin: 0;
+}
+
+.two
+{
+    
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+    /* height: 100vh; */
+    width: 100vw;
+    background-color: white;
+    /* background-color: rgb(57, 96, 87); */
+    
+}
+
+.secao {
+    padding-top: 5rem;
+    /* padding-left: 1rem; */
+    color: rgb(29, 123, 62);
+}
+
+.containerCardapio{
+    background-color:cadetblue;
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: .5rem;
+}
+
+.infosCardapio,
+.imgCardapio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: black;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+
+}
+
+.container-two{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+}
+
+
+.tools{
+    color: black;
+}
+
+.text-img-two{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imgCardapio {
+    width: 10rem;
+    height: 6rem;
+    background-color: #f1f1f1;
+}
+
+
+
+@media screen and (min-width: 790px) {
+    .two {
+        height: none;
+    }
+
+    .img-two {
+        height: 5rem;
+        width: 15rem;
+        background-color: rgb(0, 245, 253);
+        border-radius: 1rem;
+    }
+
+    .container-two{
+        /* display: grid; */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+}

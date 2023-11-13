@@ -13,7 +13,7 @@ p {
 }
 
 .first,
-.two,
+/* .two, */
 .three {
     padding-top: 5rem;
     height: 60rem;
@@ -26,17 +26,18 @@ p {
     height: 60rem;
 } */
 
-.bar {
+
+/* .bar {
     position: fixed;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(21, 39, 33);
+    background-color: rgb(119, 160, 146);
     flex-direction: row;
     width: 100%;
     margin-top: -5rem;
-}
+} */
 
 .txt-bar {
     
@@ -44,13 +45,13 @@ p {
     color: rgb(231, 231, 201);
 }
 
-.right,
+/* .right,
 .left{
     display: flex;
     align-items: center;
     gap: 1rem;
     margin: .5rem;
-}
+} */
 
 
 .my-mark{
@@ -59,7 +60,7 @@ p {
     height: 3rem;
     border-radius: .5rem;
 
-}
+} */
 
 .icon1,
 .icon2,
@@ -107,6 +108,7 @@ p {
 .detalhesPedido{
     color: black;
 }
+
 .img-my-mark{
     /* componente grayscale */
     margin-top: 10rem;
@@ -126,26 +128,26 @@ p {
     color: rgb(57, 96, 87);
 }
 
-.two {
+/* .two {
     background-color: rgb(57, 96, 87);
 
-}
+} */
 
-.text-imagem-two,
+/* .text-imagem-two,
 .image-two {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
+} */
 
-.image-two {
+.img-two {
     height: 20rem;
     width: 15rem;
     background-color: rgb(29, 123, 62);
 }
 
-.container-two,
+/* .container-two, */
 .container-three {
     display: grid;
     grid-template-columns: 1fr;
@@ -237,10 +239,10 @@ p {
         background-color: rgb(255, 255, 255);
     }
 
-    .two {
+    /* .two {
         height: 30rem;
         background-color: rgb(115, 178, 189);
-    }
+    } */
 
     .three {
         height: 1rem;
@@ -251,13 +253,12 @@ p {
         display: flex;
         align-items: center;
     }
-
     .my-mark{
         background-color: rgb(241, 134, 80);
         width: 3rem;
         height: 3rem;
         border-radius: .5rem;
-    }
+    } */
 
     .icon1,
     .icon2,
@@ -282,7 +283,7 @@ p {
 
     }
 
-    .image-two {
+    /* .image-two {
         height: 20rem;
         width: 55rem;
         background-color: rgb(29, 123, 62);
@@ -294,5 +295,5 @@ p {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-    }
+    } */
 }

@@ -1,0 +1,22 @@
+.formLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20rem;
+    width: 25rem;
+    background-color: rgb(255, 253, 242);
+    border-radius: 1rem;
+  }
+  
+  .formGroup {
+    margin: 10px 0;
+  }
+  
+  .inputField {
+    display: flex;
+    /* align-items: center; */
+    border-radius: .5rem;
+    padding: .3rem;
+    width: 10rem; /* Adapte o tamanho conforme necessário */
+  }
+  

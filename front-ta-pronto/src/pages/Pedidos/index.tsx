@@ -12,7 +12,7 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 
-export function Home() {
+export function Pedidos() {
   const minutes = 1;
   const [timerEnded, setTimerEnded] = useState(false);
 
@@ -24,10 +24,9 @@ export function Home() {
     <main>
       <section className="first">
         <div className="img-fundo"></div>
-        <div className="bar">
+        {/* <div className="bar">
           <div className="left">
             <div className="my-mark"></div>
-            {/* <div className="txt-bar">Home</div> */}
             <FontAwesomeIcon icon={faUtensils} size="lg" />
             <div className="txt-bar">Pedidos</div>
             <FontAwesomeIcon icon={faRectangleList} size="lg" />
@@ -41,7 +40,7 @@ export function Home() {
             <FontAwesomeIcon icon={faSliders} size="lg" />
             <div className="txt-bar">Configurações</div>
           </div>
-        </div>
+        </div> */}
         <div className="textos-principais">
           <h1 className="titulo-principal">Tempo do pedido</h1>
         </div>

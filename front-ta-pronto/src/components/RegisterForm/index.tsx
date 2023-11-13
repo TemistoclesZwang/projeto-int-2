@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface RegistrationFormProps {
   onSubmit: (formData: any) => void;
@@ -6,10 +6,11 @@ interface RegistrationFormProps {
 
 export function RegistrationForm({ onSubmit }: RegistrationFormProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    typeUser: "cliente", // Adicionei o campo typeUser com um valor padrão 'funcionario'
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -28,23 +29,31 @@ export function RegistrationForm({ onSubmit }: RegistrationFormProps) {
     if (formSubmitted) {
       async function postData() {
         try {
-          const response = await fetch('http://localhost:3000/users/novo', {
-            method: 'POST',
+          const response = await fetch("http://localhost:3000/users/novo", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
           });
           const data = await response.json();
           console.log(data);
         } catch (error) {
-          console.error('Erro ao fazer registro:', error);
+          console.error("Erro ao fazer registro:", error);
         } finally {
           setFormSubmitted(false);
         }
       }
 
-      if (formData.name && formData.email && formData.password && formData.passwordConfirm) {
+      if (
+        formData.name &&
+        formData.email &&
+        formData.password &&
+        formData.passwordConfirm &&
+        formData.typeUser
+      ) {
+        console.log(postData);
+
         postData();
       }
     }
@@ -92,8 +101,29 @@ export function RegistrationForm({ onSubmit }: RegistrationFormProps) {
           onChange={handleChange}
         />
       </div>
+      <div>
+        <label htmlFor="typeUserFuncionario">Funcionário:</label>
+        <input
+          type="radio"
+          id="typeUserFuncionario"
+          name="typeUser"
+          value="funcionario"
+          checked={formData.typeUser === "funcionario"}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="typeUserCliente">Cliente:</label>
+        <input
+          type="radio"
+          id="typeUserCliente"
+          name="typeUser"
+          value="cliente"
+          checked={formData.typeUser === "cliente"}
+          onChange={handleChange}
+        />
+      </div>
       <button type="submit">Register</button>
     </form>
   );
-};
-
+}
