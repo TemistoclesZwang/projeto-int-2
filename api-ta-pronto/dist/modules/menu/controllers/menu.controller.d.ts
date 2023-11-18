@@ -5,4 +5,5 @@ export declare class MenuController {
     private menuRepository;
     constructor(menuService: MenuService, menuRepository: MenuRepository);
     findByMenuId(menuId: string): Promise<any[]>;
+    findAll(): Promise<any[]>;
 }

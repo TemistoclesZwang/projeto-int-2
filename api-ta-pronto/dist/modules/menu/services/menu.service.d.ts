@@ -5,4 +5,5 @@ export declare class MenuService {
     private readonly menuRepository;
     constructor(usersRepository: UserRepository, menuRepository: MenuRepository);
     findByMenuId(menuId: string): Promise<any[]>;
+    findAll(): Promise<any[]>;
 }

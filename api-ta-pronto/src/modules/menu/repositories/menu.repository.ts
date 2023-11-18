@@ -23,6 +23,11 @@ export class MenuRepository {
     return menu;
   }
 
+  async findAll(): Promise<Menu[]> {
+    return this.prisma.menu.findMany();
+}
+
+
   
 
 // .!testar update e remove

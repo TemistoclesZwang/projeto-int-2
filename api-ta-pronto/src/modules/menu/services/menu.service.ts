@@ -49,6 +49,10 @@ export class MenuService {
     return this.menuRepository.findByMenuId(menuId);
   }
 
+    async findAll(): Promise<any[]> {
+    return this.menuRepository.findAll();
+  }
+
   // async update(updateUserDto: UpdateUserDto): Promise<User> {
   //   try {
   //     const user = await this.usersRepository.findEmail(updateUserDto.email);

@@ -35,5 +35,6 @@ model Menu {
   ingredientes String
   descricao    String
   preco        Float
+  img          String?
   orders       Order[]
 }

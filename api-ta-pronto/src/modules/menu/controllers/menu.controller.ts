@@ -43,6 +43,16 @@ export class MenuController {
   findByMenuId(@Param('menuId') menuId: string) {
     return this.menuService.findByMenuId(menuId);
   }
+
+  @Get('menuall')
+  @ApiOperation({ summary: 'Lista todos os users' })
+  @ApiResponse({
+    status: 200,
+    description: 'Lista de users retornada com sucesso',
+  })
+  findAll() {
+    return this.menuService.findAll();
+  }
 }
 
 //   @Patch('update')
