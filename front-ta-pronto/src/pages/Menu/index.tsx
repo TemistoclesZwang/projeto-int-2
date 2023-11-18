@@ -1,5 +1,6 @@
+import { EmailContext } from "../../components/LoginForm";
 import "./index.css";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 interface MenuItem {
   menuId: string;
@@ -7,11 +8,12 @@ interface MenuItem {
   ingredientes: string;
   descricao: string;
   preco: number;
+  img: string;
 }
 
 export function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [counter, setCounter] = useState<number>(0);
+  const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -22,21 +24,34 @@ export function Menu() {
         }
         const data: MenuItem[] = await response.json();
         setMenuItems(data);
+
+        // Initialize counters for each menu item
+        const initialCounters: { [menuId: string]: number } = {};
+        data.forEach((item) => {
+          initialCounters[item.menuId] = 0;
+        });
+        setCounters(initialCounters);
       } catch (error) {
-        // console.error(error.message);
+        // Handle error
       }
     };
 
     fetchMenu();
   }, []);
 
-  const handleIncrement = () => {
-    setCounter((prevCounter) => prevCounter + 1);
+  const handleIncrement = (menuId: string) => {
+    setCounters((prevCounters) => ({
+      ...prevCounters,
+      [menuId]: (prevCounters[menuId] || 0) + 1,
+    }));
   };
 
-  const handleDecrement = () => {
-    if (counter > 0) {
-      setCounter((prevCounter) => prevCounter - 1);
+  const handleDecrement = (menuId: string) => {
+    if (counters[menuId] && counters[menuId] > 0) {
+      setCounters((prevCounters) => ({
+        ...prevCounters,
+        [menuId]: prevCounters[menuId] - 1,
+      }));
     }
   };
 
@@ -48,11 +63,11 @@ export function Menu() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'email113@teste',
+
+          email: useContext(EmailContext),
           orderStatus: 'cancelado',
           menuId,
           // !pegar email e id do login do usuário
-          // está sendo devolvido o acess token, extrair dele o Id do usuário
           // e usar esse Id ao fazer o pedido
           // criar componente que verifica se é funcionario ou cliente
             // se cliente redireciona para tela de pedido
@@ -84,12 +99,14 @@ export function Menu() {
                 <strong>Preço:</strong> R${item.preco.toFixed(2)}
               </p>
               <div className="tools">
-                <button onClick={handleIncrement}>+</button>
-                <span>{counter}</span>
-                <button onClick={handleDecrement}>-</button>
+                <button onClick={() => handleIncrement(item.menuId)}>+</button>
+                <span>{counters[item.menuId]}</span>
+                <button onClick={() => handleDecrement(item.menuId)}>-</button>
               </div>
-              <div className="imgCardapio"></div>
-                <button onClick={() => placeOrder(item.menuId)}>Adicionar ao carrinho</button>
+              <div className="imgCardapio">
+                <img src={item.img} className="imgCardapio" alt="cardapio" />
+              </div>
+              <button onClick={() => placeOrder(item.menuId)}>Adicionar ao carrinho</button>
             </div>
           </div>
         ))}

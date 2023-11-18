@@ -1,3 +1,8 @@
+.register{
+  margin-top: 1rem;
+  color: black;
+}
+
 .formLogin {
     display: flex;
     flex-direction: column;
@@ -6,6 +11,7 @@
     width: 25rem;
     background-color: rgb(255, 253, 242);
     border-radius: 1rem;
+    margin-top: 7rem;
   }
   
   .formGroup {

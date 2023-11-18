@@ -8,11 +8,12 @@ import { AuthProvider, useAuth } from "../context/AuthContext";
 import { Menu } from "../pages/Menu";
 import { Pedidos } from "../pages/Pedidos";
 import { Pay } from "../pages/Pay";
-interface PrivateRouteProps {
+
+interface ProtectedRouteProps {
   element: React.ReactNode;
 }
 
-export function PrivateRoute({ element }: PrivateRouteProps) {
+export function ProtectedRoute({ element }: ProtectedRouteProps) {
   const { isLoggedIn } = useAuth();
 
   if (isLoggedIn) {
@@ -27,13 +28,11 @@ export const MyRouter = (
     <Routes>
       <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
-      <Route path="/cardapio/*" element={<Menu />} />
       <Route path="/pedidos/*" element={<Pedidos />} />
       <Route path="/pagamento/*" element={<Pay />} />
       <Route path="*" element={<NotFound />} />
-      <Route
-        path="/about/*"
-        element={<PrivateRoute element={<About />} />}
+      <Route path="/about/*" element={<ProtectedRoute element={<About />} />} />
+      <Route path="/cardapio/*" element={<ProtectedRoute element={<Menu />} />}
       />
     </Routes>
   </AuthProvider>

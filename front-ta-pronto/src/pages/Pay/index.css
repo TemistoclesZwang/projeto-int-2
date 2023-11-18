@@ -1,4 +1,11 @@
+
 .containerQrCode{
     display: flex;
     justify-content: center;
+    margin-top: 5rem;
+
+}
+
+.Titulo{
+    margin-top: 0;
 }

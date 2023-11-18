@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import './index.css';
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
 
+export const EmailContext = createContext<string | null>(null);
+
 export function LoginForm({ onLogin }: LoginFormProps) {
-  const [email, setid] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
-
   const { login, isLoggedIn } = useAuth();
 
   const handleLogin = () => {
@@ -34,6 +37,9 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
       const data = await response.json();
       console.log(data);
+
+      // Define o email no contexto após o login
+      setEmail(data.email);
     } catch (error) {
       console.error('Erro ao fazer login:', error);
     }
@@ -53,30 +59,44 @@ export function LoginForm({ onLogin }: LoginFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='formLogin'>
-      <div className='formGroup'>
-        <label htmlFor='email'>email:</label>
-        <input
-          type='text'
-          id='email'
-          value={email}
-          onChange={(e) => setid(e.target.value)}
-          className='inputField'
-        />
-      </div>
-      <div className='formGroup'>
-        <label htmlFor='password'>Password:</label>
-        <input
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className='inputField'
-        />
-      </div>
-      <button type='submit' className='submitLogin'>
-        Login
-      </button>
-    </form>
+    <EmailContext.Provider value={email}>
+      <form onSubmit={handleSubmit} className='formLogin'>
+        <div className='formGroup'>
+          <label htmlFor='email'>Email:</label>
+          <input
+            type='text'
+            id='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className='inputField'
+          />
+        </div>
+        <div className='formGroup'>
+          <label htmlFor='password'>Password:</label>
+          <input
+            type='password'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='inputField'
+          />
+        </div>
+        <button type='submit' className='submitLogin'>
+          Login
+        </button>
+        <p className='register'> Não tem uma conta? <Link to='/register/'>Registre-se aqui!</Link></p>
+      </form>
+    </EmailContext.Provider>
+  );
+}
+
+// Exemplo de como utilizar o EmailContext em outros componentes
+export function SomeComponent() {
+  const userEmail = useContext(EmailContext);
+
+  return (
+    <div>
+      <p>Email do usuário: {userEmail}</p>
+    </div>
   );
 }
