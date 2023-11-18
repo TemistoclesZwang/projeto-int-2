@@ -1,6 +1,7 @@
 import React from 'react';
 import "./index.css";
 
+
 import {LoginForm} from '../../components/LoginForm';
 
 export function LoginPage() {
@@ -11,8 +12,9 @@ export function LoginPage() {
 
   return (
     <div className='containerLogin'>
-      <h1>Login Page</h1>
+      <h2>Tá pronto</h2>
       <LoginForm onLogin={handleLogin} />
+
     </div>
   );
 };

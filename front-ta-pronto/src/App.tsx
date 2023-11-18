@@ -9,44 +9,54 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { BtnNavBar } from "./components/BtnNavBar";
-import { GenQrCode } from "./components/GenQrCode";
-import { LoginPage } from "./pages/Login";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import { useEffect } from "react";
+
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const { login,isLoggedIn } = useAuth(); // Obtenha o estado de login do contexto de autenticação
+
+  const handleLogin = () => {
+    login();
+  };
 
   return (
     <>
       <BrowserRouter>
-      
+        {isLoggedIn && ( // Renderize a navbar apenas se o usuário estiver logado
         <nav className="navbar">
-          <ul className="links">
-            <div className="left">
-              <BtnNavBar to="/Pedidos" icon={faUtensils} text="Pedidos" />
-              <BtnNavBar
-                to="/cardapio"
-                icon={faRectangleList}
-                text="Cardápio"
-              />
-              <BtnNavBar
-                to="/pagamento"
-                icon={faCartShopping}
-                text="Pagamento"
-              />
-            </div>
-            <div className="right">
-              <BtnNavBar to="/LoginPage" icon={faBell} text="Notificações" />
-              <BtnNavBar to="/register" icon={faSliders} text="Configurações" />
-            </div>
-          </ul>
-        </nav>
+            <ul className="links">
+              <div className="left">
+                <BtnNavBar to="/Pedidos" icon={faUtensils} text="Pedidos" />
+                <BtnNavBar
+                  to="/cardapio"
+                  icon={faRectangleList}
+                  text="Cardápio"
+                />
+                <BtnNavBar
+                  to="/pagamento"
+                  icon={faCartShopping}
+                  text="Pagamento"
+                />
+              </div>
+              <div className="right">
+                <BtnNavBar
+                  to="/LoginPage"
+                  icon={faBell}
+                  text="Notificações"
+                />
+                <BtnNavBar
+                  to="/register"
+                  icon={faSliders}
+                  text="Configurações"
+                />
+              </div>
+            </ul>
+          </nav>
+        )}
         {MyRouter}
       </BrowserRouter>
-      {/* <LoginPage></LoginPage> */}
-      {/* <RegistrationPage></RegistrationPage> */}
-      {/* <Pedidos></Pedidos> */}
-      {/* <Menu></Menu> */}
-      {/* <GenQrCode></GenQrCode> */}
+      {/* Restante do seu código */}
     </>
   );
 }

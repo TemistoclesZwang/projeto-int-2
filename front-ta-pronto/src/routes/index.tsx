@@ -24,7 +24,7 @@ export function ProtectedRoute({ element }: ProtectedRouteProps) {
 }
 
 export const MyRouter = (
-  <AuthProvider>
+  // <AuthProvider>
     <Routes>
       <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
@@ -35,5 +35,5 @@ export const MyRouter = (
       <Route path="/cardapio/*" element={<ProtectedRoute element={<Menu />} />}
       />
     </Routes>
-  </AuthProvider>
+  // </AuthProvider>
 );

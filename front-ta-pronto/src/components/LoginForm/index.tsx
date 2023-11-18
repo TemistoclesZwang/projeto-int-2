@@ -1,9 +1,10 @@
-import React, { useState, createContext, useContext } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { Navigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState, createContext, useContext, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import hourglass from "../../assets/login/pattern.jpeg";
 
-import './index.css';
+import "./index.css";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -12,8 +13,8 @@ interface LoginFormProps {
 export const EmailContext = createContext<string | null>(null);
 
 export function LoginForm({ onLogin }: LoginFormProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const { login, isLoggedIn } = useAuth();
 
@@ -24,10 +25,10 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
   async function postData() {
     try {
-      const response = await fetch('http://localhost:3000/auth/signin', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/auth/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
@@ -40,8 +41,9 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
       // Define o email no contexto após o login
       setEmail(data.email);
+      handleLogin();
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
+      console.error("Erro ao fazer login:", error);
     }
   }
 
@@ -49,7 +51,6 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     e.preventDefault();
     onLogin(email, password);
     postData();
-    handleLogin();
     console.log(isLoggedIn);
   }
 
@@ -60,43 +61,39 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
   return (
     <EmailContext.Provider value={email}>
-      <form onSubmit={handleSubmit} className='formLogin'>
-        <div className='formGroup'>
-          <label htmlFor='email'>Email:</label>
+      
+      <form onSubmit={handleSubmit} className="formLogin">
+      <div className="background-hourglass">
+        <img src={hourglass} className="hourglass" alt="Example" />
+      </div>
+        <div className="formGroup">
+          <label htmlFor="email">Email:</label>
           <input
-            type='text'
-            id='email'
+            type="text"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='inputField'
+            className="inputField"
           />
         </div>
-        <div className='formGroup'>
-          <label htmlFor='password'>Password:</label>
+        <div className="formGroup">
+          <label htmlFor="password">Password:</label>
           <input
-            type='password'
-            id='password'
+            type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='inputField'
+            className="inputField"
           />
         </div>
-        <button type='submit' className='submitLogin'>
+        <button type="submit" className="submitLogin">
           Login
         </button>
-        <p className='register'> Não tem uma conta? <Link to='/register/'>Registre-se aqui!</Link></p>
+        <p className="register">
+          {" "}
+          Não tem uma conta? <Link to="/register/">Registre-se aqui!</Link>
+        </p>
       </form>
     </EmailContext.Provider>
-  );
-}
-
-// Exemplo de como utilizar o EmailContext em outros componentes
-export function SomeComponent() {
-  const userEmail = useContext(EmailContext);
-
-  return (
-    <div>
-      <p>Email do usuário: {userEmail}</p>
-    </div>
   );
 }
