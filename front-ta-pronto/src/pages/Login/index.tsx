@@ -2,20 +2,25 @@ import React from 'react';
 import "./index.css";
 
 
-import {LoginForm} from '../../components/LoginForm';
+// import {LoginForm} from '../../components/LoginForm';
+import { SendLoginForm } from '../../components/c3';
+import { CustomContextProvider } from '../../components/c1';
+import { SecondComponent } from '../../components/c2';
 
 export function LoginPage() {
-  const handleLogin = (username: string, password: string) => {
-    // Implemente a lógica de autenticação aqui
-    // console.log(`Usuário: ${username}, Senha: ${password}`);
-  };
+
 
   return (
+    <CustomContextProvider>
+    <SecondComponent></SecondComponent>
+
     <div className='containerLogin'>
       <h2 className='logo'>Tá pronto</h2>
-      <LoginForm onLogin={handleLogin} />
+      <SendLoginForm />
 
     </div>
+    </CustomContextProvider>
+
   );
 };
 

@@ -13,7 +13,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { useEffect } from "react";
 import { CustomContextProvider } from "./components/c1";
 import { SecondComponent } from "./components/c2";
-import { ValueChanger } from "./components/c3";
+import { SendLoginForm } from "./components/c3";
 
 
 function App() {
@@ -24,10 +24,10 @@ function App() {
   };
 
   return (
-    <CustomContextProvider>
+    // <CustomContextProvider>
     <>
-    <ValueChanger></ValueChanger>
-    <SecondComponent></SecondComponent>
+    {/* <LoginForm></LoginForm> */}
+    {/* <SecondComponent></SecondComponent> */}
       <BrowserRouter>
         {isLoggedIn && ( // Renderize a navbar apenas se o usuário estiver logado
         <nav className="navbar">
@@ -63,7 +63,7 @@ function App() {
         {MyRouter}
       </BrowserRouter>
     </>
-    </CustomContextProvider>
+    // </CustomContextProvider>
   );
 }
 

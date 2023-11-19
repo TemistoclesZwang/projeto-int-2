@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 import hourglass from "../../assets/login/pattern.jpeg";
 
 import "./index.css";
-
-interface LoginFormProps {
-  onLogin: (email: string, password: string) => void;
-}
+// import { ValueChanger } from "../c3";
 
 
-export function LoginForm({ onLogin }: LoginFormProps) {
+
+export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -23,6 +21,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
   };
 
   async function postData() {
+    
     try {
       const response = await fetch("http://localhost:3000/auth/signin", {
         method: "POST",
@@ -38,19 +37,22 @@ export function LoginForm({ onLogin }: LoginFormProps) {
       const data = await response.json();
       console.log(data);
 
+
       // Define o email no contexto após o login
       setEmail(data.email);
       handleLogin();
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     }
+    
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onLogin(email, password);
     postData();
-    console.log(isLoggedIn);
+    console.log('LoginForm',isLoggedIn);
+
+    
   }
 
   // Se o usuário estiver autenticado, redireciona para a página de cardápio
