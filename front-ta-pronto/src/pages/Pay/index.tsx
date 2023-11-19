@@ -1,8 +1,13 @@
+import React from 'react';
 import { GenQrCode } from "../../components/GenQrCode";
+import { CustomContextProvider } from "../../components/c1";
+import { SecondComponent } from "../../components/c2";
+import { ValueChanger } from "../../components/c3";
 import "./index.css";
 
 export function Pay(){
-  
+  const storedEmail = localStorage.getItem('storedEmail') || 'No email found';
+
   const placeOrder = async (menuId: string) => {
     try {
       const response = await fetch('http://localhost:3000/users/order', {
@@ -11,8 +16,7 @@ export function Pay(){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-
-          email: 'teste',
+          email: storedEmail,
           orderStatus: 'cancelado',
           menuId,
         }),
@@ -27,14 +31,18 @@ export function Pay(){
       // console.error(error.message);
     }
   };
-    return (
-        <section className="containerPay">
+
+  return (
+    <CustomContextProvider>
+      <section className="containerPay">
         <h2 className="Titulo">Pagamento</h2>
         <div className="containerQrCode">
-        <GenQrCode></GenQrCode>
-        <button onClick={() => placeOrder('teste')}>Adicionar ao carrinho</button>
-
+          <GenQrCode />
+          <button onClick={() => placeOrder('teste')}>Adicionar ao carrinho</button>
         </div>
       </section>
-    )
+      <p>{storedEmail}</p>
+      <SecondComponent />
+    </CustomContextProvider>
+  );
 }

@@ -1,7 +1,7 @@
 import { useCustomContext } from "../c1";
 
 export function SecondComponent() {
-    const { value } = useCustomContext();
+    const { email } = useCustomContext();
   
-    return <div>Valor do Contexto: {value}</div>;
+    return <div>Valor do Contexto: {email}</div>;
   }

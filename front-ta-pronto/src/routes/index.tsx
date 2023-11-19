@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from "../context/AuthContext";
 import { Menu } from "../pages/Menu";
 import { Pedidos } from "../pages/Pedidos";
 import { Pay } from "../pages/Pay";
+import { CustomContextProvider } from "../components/c1";
 
 interface ProtectedRouteProps {
   element: React.ReactNode;
@@ -17,9 +18,6 @@ export function ProtectedRoute({ element }: ProtectedRouteProps) {
   const { isLoggedIn } = useAuth();
 
   if (isLoggedIn) {
-    console.log('router:',isLoggedIn); 
-    //.quando acesso essa var isLoggedIn retorna true nos outros componentes
-    
     return element;
   }
 

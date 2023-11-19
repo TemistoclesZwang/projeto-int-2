@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 
 interface CustomContextProps {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setNewEmail: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CustomContext = createContext<CustomContextProps | undefined>(undefined);
@@ -15,13 +15,15 @@ export function useCustomContext() {
   return context;
 }
 
+
 export function CustomContextProvider({ children }: { children: React.ReactNode }) {
-  const [value, setValue] = useState('Initial Value');
-
-  const contextValue = {
-    value,
-    setValue,
-  };
-
-  return <CustomContext.Provider value={contextValue}>{children}</CustomContext.Provider>;
-}
+    const storedEmail = localStorage.getItem('storedEmail') || 'Initial email';
+    const [email, setNewEmail] = useState(storedEmail);
+//.para recuperar o email no formulario de login   
+    const contextEmail = {
+      email,
+      setNewEmail,
+    };
+  
+    return <CustomContext.Provider value={contextEmail}>{children}</CustomContext.Provider>;
+  }
