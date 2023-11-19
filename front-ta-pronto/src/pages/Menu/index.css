@@ -23,6 +23,7 @@ p{
 .containerCardapio{
     background-color:cadetblue;
     border-radius: 1rem;
+    max-width: 30rem;
     margin: 1rem;
     padding: .5rem;
 }

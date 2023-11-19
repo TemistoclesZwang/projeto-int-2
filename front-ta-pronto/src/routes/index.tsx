@@ -17,6 +17,9 @@ export function ProtectedRoute({ element }: ProtectedRouteProps) {
   const { isLoggedIn } = useAuth();
 
   if (isLoggedIn) {
+    console.log('router:',isLoggedIn); 
+    //.quando acesso essa var isLoggedIn retorna true nos outros componentes
+    
     return element;
   }
 

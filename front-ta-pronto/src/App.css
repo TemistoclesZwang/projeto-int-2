@@ -2,13 +2,11 @@
   position: fixed;
   z-index: 1000;
   width: 100%;
-  background-color: rgb(119, 160, 146); /* Cor de fundo da barra de navegação */
+  background-color: var(--verde-escuro); /* Cor de fundo da barra de navegação */
   /* padding: .1rem ; Espaçamento interno para os links */
   display: flex; /* Para os links ficarem lado a lado */
   justify-content: space-between; /* Alinha os links à esquerda e à direita */
 }
-
-
 
 
 .icons{
@@ -21,7 +19,8 @@
   /* position: fixed; */
   /* z-index: 1000; */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  /* justify-content: space-between; */
   align-items: center;
   /* background-color: rgb(21, 39, 33); */
   flex-direction: row;
@@ -31,10 +30,9 @@
 }
 
 .btn-nav{
-  background-color:rgb(119, 160, 146);
-  padding: 0;
+  background-color:cadetblue;
+  padding: .5rem;
 }
-
 
 
 .right,
@@ -69,6 +67,11 @@
 
 @media screen and (min-width: 790px) {
   /*, GRANDE */
+
+  .links{
+    justify-content: space-between;
+
+  }
   
   .btn-nav .hidden-text {
     display:contents;

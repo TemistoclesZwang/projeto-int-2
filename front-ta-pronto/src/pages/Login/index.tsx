@@ -12,7 +12,7 @@ export function LoginPage() {
 
   return (
     <div className='containerLogin'>
-      <h2>Tá pronto</h2>
+      <h2 className='logo'>Tá pronto</h2>
       <LoginForm onLogin={handleLogin} />
 
     </div>

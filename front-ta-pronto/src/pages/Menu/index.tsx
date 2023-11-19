@@ -1,6 +1,5 @@
-import { EmailContext } from "../../components/LoginForm";
 import "./index.css";
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface MenuItem {
   menuId: string;
@@ -14,6 +13,7 @@ interface MenuItem {
 export function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -44,6 +44,16 @@ export function Menu() {
       ...prevCounters,
       [menuId]: (prevCounters[menuId] || 0) + 1,
     }));
+
+    setSelectedItems((prevSelectedItems) => {
+      if (!prevSelectedItems.includes(menuId)) {
+        return [...prevSelectedItems, menuId];
+      }
+      return prevSelectedItems;
+    });
+
+    console.log(selectedItems)
+
   };
 
   const handleDecrement = (menuId: string) => {
@@ -55,35 +65,7 @@ export function Menu() {
     }
   };
 
-  const placeOrder = async (menuId: string) => {
-    try {
-      const response = await fetch('http://localhost:3000/users/order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
 
-          email: useContext(EmailContext),
-          orderStatus: 'cancelado',
-          menuId,
-          // !pegar email e id do login do usuário
-          // e usar esse Id ao fazer o pedido
-          // criar componente que verifica se é funcionario ou cliente
-            // se cliente redireciona para tela de pedido
-            // se funcionario mostra
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao fazer o pedido');
-      }
-
-      console.log('Pedido feito com sucesso!');
-    } catch (error) {
-      // console.error(error.message);
-    }
-  };
 
   return (
     <section className="two">
@@ -106,7 +88,6 @@ export function Menu() {
               <div className="imgCardapio">
                 <img src={item.img} className="imgCardapio" alt="cardapio" />
               </div>
-              <button onClick={() => placeOrder(item.menuId)}>Adicionar ao carrinho</button>
             </div>
           </div>
         ))}

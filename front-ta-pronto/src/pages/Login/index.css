@@ -1,10 +1,14 @@
+:root{
+    background-color:rgb(6, 47, 8)
+  }
 
-h2{
-    margin:0;
-    background-color: white;
+.logo{
+    margin:2rem;
+    background-color: rgb(15, 49, 6);
+    color: orange;
     border-radius: 3rem;
     padding: .5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .containerLogin{
     display: flex;

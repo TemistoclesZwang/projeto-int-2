@@ -14,6 +14,30 @@
   -webkit-text-size-adjust: 100%;
 }
 
+html{
+  --black: #0D114F;
+  --bege: rgb(255, 253, 242);
+  --laranja: rgb(255, 139, 71);
+  --verde-escuro:rgb(58, 95, 97);
+
+
+  /* 1rem = 16px (User Agent) = 100% (User Agent) */
+  /* font-size: 62.5% 10px */
+  /*. para conseguir converter facilmente PX em REM com a virgula */
+  /*.exemplo: 8px = 0.8rem, 16px = 1.6rem, 120px = 12,0rem */
+  /*. isso é necessário pois PX é estático REM é dinâmico, muda com o tamanho da tela */
+}
+
+/* body, button, input, textarea{
+  font-size: clamp(12px, .5rem, 2vw);
+
+} */
+  /*. clamp = setar tamanho minimo, normal e máximo */
+  /*. perceba que é o clamp somente de body,button, input e textare */
+  /*. na menor tela a fonte terá 14px */
+  /*. o padrão sera 1.6rem */
+  /*. o maximo será 2vw */
+
 
 a {
   font-weight: 500;

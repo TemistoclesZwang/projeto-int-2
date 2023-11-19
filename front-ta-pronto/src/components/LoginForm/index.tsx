@@ -10,7 +10,6 @@ interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
 
-export const EmailContext = createContext<string | null>(null);
 
 export function LoginForm({ onLogin }: LoginFormProps) {
   const [email, setEmail] = useState("");
@@ -60,8 +59,6 @@ export function LoginForm({ onLogin }: LoginFormProps) {
   }
 
   return (
-    <EmailContext.Provider value={email}>
-      
       <form onSubmit={handleSubmit} className="formLogin">
       <div className="background-hourglass">
         <img src={hourglass} className="hourglass" alt="Example" />
@@ -94,6 +91,5 @@ export function LoginForm({ onLogin }: LoginFormProps) {
           Não tem uma conta? <Link to="/register/">Registre-se aqui!</Link>
         </p>
       </form>
-    </EmailContext.Provider>
   );
 }
