@@ -5,12 +5,14 @@ import { SecondComponent } from "../../components/c2";
 import { ValueChanger } from "../../components/c3";
 import "./index.css";
 
-export function Pay(){
+export function Pay() {
   const storedEmail = localStorage.getItem('storedEmail') || 'No email found';
-  const storedItems = localStorage.getItem('selectedItems')|| 'No item found';
+  const storedItems = localStorage.getItem('selectedItems') || '[]'; // Se nada for encontrado, assume-se um array vazio
 
-  
-  const placeOrder = async (menuId: string) => {
+  const parsedStoredItems = JSON.parse(storedItems);
+  const menuIdArray = Array.isArray(parsedStoredItems) ? parsedStoredItems : [];
+
+  const placeOrder = async () => {
     try {
       const response = await fetch('http://localhost:3000/users/order', {
         method: 'POST',
@@ -19,8 +21,8 @@ export function Pay(){
         },
         body: JSON.stringify({
           email: storedEmail,
-          orderStatus: 'cancelado',
-          menuId,
+          orderStatus: 'preparando',
+          menuId: menuIdArray,
         }),
       });
 
@@ -33,23 +35,17 @@ export function Pay(){
       // console.error(error.message);
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem('storedItems', JSON.stringify(storedItems));
-    console.log(storedItems);
-  }, [storedItems]);
-
   return (
     <CustomContextProvider>
       <section className="containerPay">
         <h2 className="Titulo">Pagamento</h2>
         <div className="containerQrCode">
           <GenQrCode />
-          <button onClick={() => placeOrder('teste')}>Adicionar ao carrinho</button>
+          <button onClick={() => placeOrder()}>Adicionar ao carrinho</button>
         </div>
       </section>
       <p>{storedEmail}</p>
-      <p>items{storedItems}</p>
+      <p>items{menuIdArray}</p>
       <SecondComponent />
     </CustomContextProvider>
   );

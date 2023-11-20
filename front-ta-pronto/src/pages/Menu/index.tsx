@@ -14,11 +14,11 @@ export function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const storedItems = localStorage.getItem('selectedItems')|| 'No item found';
+  // const storedItems = localStorage.getItem('selectedItems')|| 'No item found';
+  
 
-
-  const parsedStoredItems = storedItems ? JSON.parse(storedItems) : [];
-  console.log('array',parsedStoredItems);
+  // const parsedStoredItems = storedItems ? JSON.parse(storedItems) : [];
+  // console.log('array',parsedStoredItems);
 
   useEffect(() => {
     const fetchMenu = async () => {
