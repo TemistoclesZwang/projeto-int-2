@@ -11,11 +11,11 @@ interface MenuItem {
   img: string;
 }
 
-export function ValueChanger() {
+export function ValueChanger(novoValor: string) {
   const { setOrders } = useOrderListContext();
 
   const handleValueChange = () => {
-    setOrders('pizza');
+    setOrders(novoValor);
   };
 
   return (
@@ -29,12 +29,8 @@ export function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  // const storedItems = localStorage.getItem('selectedItems')|| 'No item found';
+  const [selectedItemNames, setSelectedItemNames] = useState<string[]>([]);
   
-
-  // const parsedStoredItems = storedItems ? JSON.parse(storedItems) : [];
-  // console.log('array',parsedStoredItems);
-
   useEffect(() => {
     const fetchMenu = async () => {
       try {
@@ -59,23 +55,24 @@ export function Menu() {
     fetchMenu();
   }, []);
 
-  const handleIncrement = (menuId: string) => {
+  const handleIncrement = (menuId: string, itemName: string) => {
     setCounters((prevCounters) => ({
       ...prevCounters,
       [menuId]: (prevCounters[menuId] || 0) + 1,
     }));
 
     setSelectedItems((prevSelectedItems) => {
-      const itemCount = counters[menuId] || 0;
-      const updatedItems = [...prevSelectedItems];
-      for (let i = 0; i < itemCount; i++) {
-        updatedItems.push(menuId);
-      }
+      const updatedItems = [...prevSelectedItems, menuId];
+      return updatedItems;
+    });
+
+    setSelectedItemNames((prevSelectedItems) => {
+      const updatedItems = [...prevSelectedItems, itemName];
       return updatedItems;
     });
   };
 
-  const handleDecrement = (menuId: string) => {
+  const handleDecrement = (menuId: string, itemName: string) => {
     if (counters[menuId] && counters[menuId] > 0) {
       setCounters((prevCounters) => ({
         ...prevCounters,
@@ -83,45 +80,52 @@ export function Menu() {
       }));
 
       setSelectedItems((prevSelectedItems) => {
-        const itemCount = counters[menuId] || 0;
-        const updatedItems = [...prevSelectedItems];
-        for (let i = 0; i < itemCount; i++) {
-          const index = updatedItems.lastIndexOf(menuId);
-          if (index !== -1) {
-            updatedItems.splice(index, 1);
-          }
+        const index = prevSelectedItems.lastIndexOf(menuId);
+        if (index !== -1) {
+          const updatedItems = [...prevSelectedItems];
+          updatedItems.splice(index, 1);
+          return updatedItems;
         }
-        return updatedItems;
+        return prevSelectedItems;
+      });
+
+      setSelectedItemNames((prevSelectedItems) => {
+        const index = prevSelectedItems.lastIndexOf(itemName);
+        if (index !== -1) {
+          const updatedItems = [...prevSelectedItems];
+          updatedItems.splice(index, 1);
+          return updatedItems;
+        }
+        return prevSelectedItems;
       });
     }
   };
 
   useEffect(() => {
-    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    // localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    // localStorage.setItem('selectedItemNames', JSON.stringify(selectedItemNames));
     console.log(selectedItems);
-  }, [selectedItems]);
+    console.log(selectedItemNames);
+  }, [selectedItems, selectedItemNames]);
 
   return (
-    // <OrderListContextProvider>
     <section className="two">
       <h2 className="secao">Cardápio</h2>
-      <ValueChanger></ValueChanger>
-
+      {/* <ValueChanger novoValor={selectedItemNames}></ValueChanger> */}
       <div className="container-two">
         {menuItems.map((item) => (
           <div className="containerCardapio" key={item.menuId}>
             <div className="infosCardapio">
               <p className="pratos">
                 <strong>Nome:</strong> {item.nome} <br />
-                //.guardar os nomes dos itens pedidos para recuperar nos pedidos
                 <strong>Ingredientes:</strong> {item.ingredientes} <br />
                 <strong>Descrição:</strong> {item.descricao} <br />
                 <strong>Preço:</strong> R${item.preco.toFixed(2)}
               </p>
               <div className="tools">
-                <button onClick={() => handleIncrement(item.menuId)}>+</button>
+                <button onClick={() => handleIncrement(item.menuId, item.nome)}>+</button>
                 <span>{counters[item.menuId]}</span>
-                <button onClick={() => handleDecrement(item.menuId)}>-</button>
+                <button onClick={() => handleDecrement(item.menuId, item.nome)}>-</button>
               </div>
               <div className="imgCardapio">
                 <img src={item.img} className="imgCardapio" alt="cardapio" />
@@ -131,6 +135,5 @@ export function Menu() {
         ))}
       </div>
     </section>
-    // </OrderListContextProvider>
   );
 }

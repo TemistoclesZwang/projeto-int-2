@@ -17,6 +17,7 @@ export function useCustomContext() {
 
 
 export function CustomContextProvider({ children }: { children: React.ReactNode }) {
+  // .só deve ser usado em um único lugar e no lugar mais alto possível (App.tsx)
     const storedEmail = localStorage.getItem('storedEmail') || 'Initial email';
     const [email, setNewEmail] = useState(storedEmail);
 //.para recuperar o email no formulario de login   
