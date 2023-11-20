@@ -14,6 +14,11 @@ export function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const storedItems = localStorage.getItem('selectedItems')|| 'No item found';
+
+
+  const parsedStoredItems = storedItems ? JSON.parse(storedItems) : [];
+  console.log('array',parsedStoredItems);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -35,7 +40,7 @@ export function Menu() {
         // Handle error
       }
     };
-
+    
     fetchMenu();
   }, []);
 
@@ -46,14 +51,13 @@ export function Menu() {
     }));
 
     setSelectedItems((prevSelectedItems) => {
-      if (!prevSelectedItems.includes(menuId)) {
-        return [...prevSelectedItems, menuId];
+      const itemCount = counters[menuId] || 0;
+      const updatedItems = [...prevSelectedItems];
+      for (let i = 0; i < itemCount; i++) {
+        updatedItems.push(menuId);
       }
-      return prevSelectedItems;
+      return updatedItems;
     });
-
-    console.log(selectedItems)
-
   };
 
   const handleDecrement = (menuId: string) => {
@@ -62,10 +66,25 @@ export function Menu() {
         ...prevCounters,
         [menuId]: prevCounters[menuId] - 1,
       }));
+
+      setSelectedItems((prevSelectedItems) => {
+        const itemCount = counters[menuId] || 0;
+        const updatedItems = [...prevSelectedItems];
+        for (let i = 0; i < itemCount; i++) {
+          const index = updatedItems.lastIndexOf(menuId);
+          if (index !== -1) {
+            updatedItems.splice(index, 1);
+          }
+        }
+        return updatedItems;
+      });
     }
   };
 
-
+  useEffect(() => {
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    console.log(selectedItems);
+  }, [selectedItems]);
 
   return (
     <section className="two">

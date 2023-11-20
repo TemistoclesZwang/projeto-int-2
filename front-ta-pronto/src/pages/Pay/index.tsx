@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GenQrCode } from "../../components/GenQrCode";
 import { CustomContextProvider } from "../../components/c1";
 import { SecondComponent } from "../../components/c2";
@@ -7,7 +7,9 @@ import "./index.css";
 
 export function Pay(){
   const storedEmail = localStorage.getItem('storedEmail') || 'No email found';
+  const storedItems = localStorage.getItem('selectedItems')|| 'No item found';
 
+  
   const placeOrder = async (menuId: string) => {
     try {
       const response = await fetch('http://localhost:3000/users/order', {
@@ -32,6 +34,11 @@ export function Pay(){
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem('storedItems', JSON.stringify(storedItems));
+    console.log(storedItems);
+  }, [storedItems]);
+
   return (
     <CustomContextProvider>
       <section className="containerPay">
@@ -42,6 +49,7 @@ export function Pay(){
         </div>
       </section>
       <p>{storedEmail}</p>
+      <p>items{storedItems}</p>
       <SecondComponent />
     </CustomContextProvider>
   );
