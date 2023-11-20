@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
 import { GenQrCode } from "../../components/GenQrCode";
-import { CustomContextProvider } from "../../components/c1";
-import { SecondComponent } from "../../components/c2";
-import { ValueChanger } from "../../components/c3";
+import { CustomContextProvider } from "../../context/c1";
+import { SecondComponent } from "../../context/c2";
 import "./index.css";
 
 export function Pay() {
@@ -41,7 +39,7 @@ export function Pay() {
         <h2 className="Titulo">Pagamento</h2>
         <div className="containerQrCode">
           <GenQrCode />
-          <button onClick={() => placeOrder()}>Adicionar ao carrinho</button>
+          <button onClick={() => placeOrder()}>Pagar</button>
         </div>
       </section>
       <p>{storedEmail}</p>

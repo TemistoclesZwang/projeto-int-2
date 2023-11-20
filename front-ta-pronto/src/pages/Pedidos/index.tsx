@@ -3,16 +3,15 @@ import { GenQrCode } from "../../components/GenQrCode";
 import "./index.css";
 import { GrayscaleFilterImg } from "../../components/GrayscaleFilterImg";
 import { Countdown } from "../../components/CountDown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBell,
-  faCartShopping,
-  faRectangleList,
-  faSliders,
-  faUtensils,
-} from "@fortawesome/free-solid-svg-icons";
+import { OrderListContextProvider, useOrderListContext } from "../../context/OrderListContext";
+
+export function OrderComp() {
+    const { orders } = useOrderListContext();
+    return <div>Pedidos: {orders}</div>;
+  }
 
 export function Pedidos() {
+
   const minutes = 1;
   const [timerEnded, setTimerEnded] = useState(false);
 
@@ -21,26 +20,10 @@ export function Pedidos() {
   };
 
   return (
+    // <OrderListContextProvider>
     <main>
       <section className="first">
         <div className="img-fundo"></div>
-        {/* <div className="bar">
-          <div className="left">
-            <div className="my-mark"></div>
-            <FontAwesomeIcon icon={faUtensils} size="lg" />
-            <div className="txt-bar">Pedidos</div>
-            <FontAwesomeIcon icon={faRectangleList} size="lg" />
-            <div className="txt-bar">Cardápio</div>
-            <FontAwesomeIcon icon={faCartShopping} size="lg" />
-            <div className="txt-bar">Pagamento</div>
-          </div>
-          <div className="right">
-            <FontAwesomeIcon icon={faBell} size="lg" />
-            <div className="txt-bar">Notificações</div>
-            <FontAwesomeIcon icon={faSliders} size="lg" />
-            <div className="txt-bar">Configurações</div>
-          </div>
-        </div> */}
         <div className="textos-principais">
           <h1 className="titulo-principal">Tempo do pedido</h1>
         </div>
@@ -57,6 +40,8 @@ export function Pedidos() {
               )}
             </div>
             <div className="detalhesPedido">Detalhes do pedido:</div>
+            <OrderComp></OrderComp>
+
             <GrayscaleFilterImg isColored={timerEnded}></GrayscaleFilterImg>
           </div>
         </div>
@@ -116,5 +101,6 @@ export function Pedidos() {
         </div>
       </section>
     </main>
+    // </OrderListContextProvider>
   );
 }

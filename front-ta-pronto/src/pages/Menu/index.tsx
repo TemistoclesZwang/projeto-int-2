@@ -1,5 +1,6 @@
 import "./index.css";
 import React, { useEffect, useState } from 'react';
+import { OrderListContextProvider, useOrderListContext } from "../../context/OrderListContext";
 
 interface MenuItem {
   menuId: string;
@@ -8,6 +9,20 @@ interface MenuItem {
   descricao: string;
   preco: number;
   img: string;
+}
+
+export function ValueChanger() {
+  const { setOrders } = useOrderListContext();
+
+  const handleValueChange = () => {
+    setOrders('pizza');
+  };
+
+  return (
+    <div>
+      <button onClick={handleValueChange}>Change Value</button>
+    </div>
+  );
 }
 
 export function Menu() {
@@ -87,14 +102,18 @@ export function Menu() {
   }, [selectedItems]);
 
   return (
+    // <OrderListContextProvider>
     <section className="two">
       <h2 className="secao">Cardápio</h2>
+      <ValueChanger></ValueChanger>
+
       <div className="container-two">
         {menuItems.map((item) => (
           <div className="containerCardapio" key={item.menuId}>
             <div className="infosCardapio">
               <p className="pratos">
                 <strong>Nome:</strong> {item.nome} <br />
+                //.guardar os nomes dos itens pedidos para recuperar nos pedidos
                 <strong>Ingredientes:</strong> {item.ingredientes} <br />
                 <strong>Descrição:</strong> {item.descricao} <br />
                 <strong>Preço:</strong> R${item.preco.toFixed(2)}
@@ -112,5 +131,6 @@ export function Menu() {
         ))}
       </div>
     </section>
+    // </OrderListContextProvider>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 
-import { useCustomContext } from '../c1';
+import { useCustomContext } from '../../context/c1';
 import { useAuth } from "../../context/AuthContext";
 import { Link, Navigate } from "react-router-dom";
 import hourglass from "../../assets/login/pattern.jpeg";

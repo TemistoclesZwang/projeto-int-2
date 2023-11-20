@@ -8,7 +8,7 @@ import { AuthProvider, useAuth } from "../context/AuthContext";
 import { Menu } from "../pages/Menu";
 import { Pedidos } from "../pages/Pedidos";
 import { Pay } from "../pages/Pay";
-import { CustomContextProvider } from "../components/c1";
+import { OrderListContextProvider } from "../context/OrderListContext";
 
 interface ProtectedRouteProps {
   element: React.ReactNode;
@@ -26,6 +26,7 @@ export function ProtectedRoute({ element }: ProtectedRouteProps) {
 
 export const MyRouter = (
   // <AuthProvider>
+  // <OrderListContextProvider>
     <Routes>
       <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
@@ -36,5 +37,7 @@ export const MyRouter = (
       <Route path="/cardapio/*" element={<ProtectedRoute element={<Menu />} />}
       />
     </Routes>
+  // </OrderListContextProvider>
+
   // </AuthProvider>
 );

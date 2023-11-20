@@ -9,12 +9,9 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { BtnNavBar } from "./components/BtnNavBar";
-import { AuthProvider, useAuth } from "./context/AuthContext";
-import { useEffect } from "react";
-import { CustomContextProvider } from "./components/c1";
-import { SecondComponent } from "./components/c2";
-import { SendLoginForm } from "./components/SendLoginForm";
-// import { useContexto } from "./components/SendLoginForm";
+import { useAuth } from "./context/AuthContext";
+import { OrderListContextProvider } from "./context/OrderListContext";
+
 
 
 
@@ -26,10 +23,12 @@ function App() {
   };
 
   return (
-    // <CustomContextProvider>
+    <OrderListContextProvider>
+    {/* // <CustomContextProvider> */}
     <>
     {/* <<LoginForm></LoginForm>> */}
     {/* <SecondComponent></SecondComponent> */}
+
       <BrowserRouter>
         {isLoggedIn && ( // Renderize a navbar apenas se o usuário estiver logado
         <nav className="navbar">
@@ -65,6 +64,7 @@ function App() {
         {MyRouter}
       </BrowserRouter>
     </>
+  </OrderListContextProvider>
     // </CustomContextProvider>
   );
 }
