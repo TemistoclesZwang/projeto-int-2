@@ -11,26 +11,24 @@ interface MenuItem {
   img: string;
 }
 
-export function ValueChanger(novoValor: string) {
-  const { setOrders } = useOrderListContext();
 
-  const handleValueChange = () => {
-    setOrders(novoValor);
-  };
-
-  return (
-    <div>
-      <button onClick={handleValueChange}>Change Value</button>
-    </div>
-  );
-}
 
 export function Menu() {
+  const { setOrders } = useOrderListContext();
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [selectedItemNames, setSelectedItemNames] = useState<string[]>([]);
-  
+
+  const handleValueChange = (novoValor: string | string[]) => {
+    if (Array.isArray(novoValor)) {
+      const stringSeparatedByComma = novoValor.join(', ');
+      setOrders(stringSeparatedByComma);
+    } else {
+      setOrders(novoValor);
+    }
+  };
+
   useEffect(() => {
     const fetchMenu = async () => {
       try {
@@ -51,9 +49,10 @@ export function Menu() {
         // Handle error
       }
     };
-    
+
     fetchMenu();
   }, []);
+
 
   const handleIncrement = (menuId: string, itemName: string) => {
     setCounters((prevCounters) => ({
@@ -101,12 +100,17 @@ export function Menu() {
     }
   };
 
+
   useEffect(() => {
-    // localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-    // localStorage.setItem('selectedItemNames', JSON.stringify(selectedItemNames));
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems)); //!
+    // localStorage.setItem('selectedItemNames', JSON.stringify(selectedItemNames)); //!
+
+    const stringSeparatedByComma = selectedItemNames.join(', '); // Converte o array para uma string separada por vírgulas
+    handleValueChange(stringSeparatedByComma); // Chama a função para atualizar os pedidos
+
     console.log(selectedItems);
     console.log(selectedItemNames);
-  }, [selectedItems, selectedItemNames]);
+  }, [selectedItemNames]); // Dispara sempre que há mudanças em selectedItemNames
 
   return (
     <section className="two">
