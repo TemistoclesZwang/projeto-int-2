@@ -1,14 +1,22 @@
-import React from 'react';
+import soundNotification from "../../assets/notification/notificationSound2.mp3"
+export function showNotification(shouldShowNotification: boolean) {
+  if (!("Notification" in window)) {
+    console.log("Browser does not support desktop notification");
+    return;
+  }
 
-export const SoundNotification: React.FC = () => {
-  const playNotificationSound = () => {
-    const audio = new Audio('caminho/do/arquivo/de/audio.mp3'); 
-    audio.play();
-  };
+  if (shouldShowNotification) {
+    Notification.requestPermission()
+      .then((permission) => {
+        if (permission === "granted") {
+          const notificationSound = new Audio(soundNotification);
+          notificationSound.play();
 
-  return (
-    <button onClick={playNotificationSound}>
-      Acionar Notificação Sonora
-    </button>
-  );
-};
+          new Notification("Hello World");
+        }
+      })
+      .catch((error) => {
+        console.error("Error displaying notification:", error);
+      });
+  }
+}

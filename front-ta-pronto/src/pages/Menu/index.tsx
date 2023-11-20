@@ -11,8 +11,6 @@ interface MenuItem {
   img: string;
 }
 
-
-
 export function Menu() {
   const { setOrders } = useOrderListContext();
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);

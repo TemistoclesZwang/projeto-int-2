@@ -4,6 +4,8 @@ import "./index.css";
 import { GrayscaleFilterImg } from "../../components/GrayscaleFilterImg";
 import { Countdown } from "../../components/CountDown";
 import { OrderListContextProvider, useOrderListContext } from "../../context/OrderListContext";
+import { showNotification } from "../../components/SendNotification";
+import { useParams } from "react-router-dom";
 
 export function OrderComp() {
     const { orders } = useOrderListContext();
@@ -14,10 +16,16 @@ export function Pedidos() {
 
   const minutes = 1;
   const [timerEnded, setTimerEnded] = useState(false);
+  const { parametro }: { parametro?: string } = useParams();
+  const valorParametro = parametro === 'true';
+
 
   const handleTimerEnd = () => {
     setTimerEnded(true);
+    showNotification(true)
   };
+  console.log('parametro:', parametro);
+  console.log('valorParametro:', valorParametro);
 
   return (
     // <OrderListContextProvider>
@@ -34,6 +42,7 @@ export function Pedidos() {
                 <Countdown
                   initialMinutes={minutes}
                   onTimerEnd={handleTimerEnd}
+                  startTimer={valorParametro} //.receber esse parametro pelo react router
                 />
               ) : (
                 <div>Tá pronto!</div>

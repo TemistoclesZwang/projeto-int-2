@@ -34,7 +34,15 @@ function App() {
         <nav className="navbar">
             <ul className="links">
               <div className="left">
-                <BtnNavBar to="/Pedidos" icon={faUtensils} text="Pedidos" />
+
+              <BtnNavBar to="/pedidos" 
+                icon={faUtensils} 
+                text="Home" />
+
+                <BtnNavBar to="/pedidos/false" 
+                icon={faUtensils} 
+                text="Pedidos" />
+
                 <BtnNavBar
                   to="/cardapio"
                   icon={faRectangleList}
@@ -47,11 +55,11 @@ function App() {
                 />
               </div>
               <div className="right">
-                <BtnNavBar
+                {/* <BtnNavBar
                   to="/LoginPage"
                   icon={faBell}
                   text="Notificações"
-                />
+                /> */}
                 <BtnNavBar
                   to="/register"
                   icon={faSliders}
