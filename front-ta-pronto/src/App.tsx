@@ -13,24 +13,13 @@ import { useAuth } from "./context/AuthContext";
 import { OrderListContextProvider } from "./context/OrderListContext";
 
 
-
-
 function App() {
-  const { login,isLoggedIn } = useAuth(); // Obtenha o estado de login do contexto de autenticação
-
-  const handleLogin = () => {
-    login();
-  };
+  const { isLoggedIn } = useAuth(); 
 
   return (
     <OrderListContextProvider>
-    {/* // <CustomContextProvider> */}
-    <>
-    {/* <<LoginForm></LoginForm>> */}
-    {/* <SecondComponent></SecondComponent> */}
-
       <BrowserRouter>
-        {isLoggedIn && ( // Renderize a navbar apenas se o usuário estiver logado
+        {isLoggedIn && (
         <nav className="navbar">
             <ul className="links">
               <div className="left">
@@ -71,9 +60,7 @@ function App() {
         )}
         {MyRouter}
       </BrowserRouter>
-    </>
-  </OrderListContextProvider>
-    // </CustomContextProvider>
+      </OrderListContextProvider>
   );
 }
 

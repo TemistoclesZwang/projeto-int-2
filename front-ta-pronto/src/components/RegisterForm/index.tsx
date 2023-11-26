@@ -1,63 +1,69 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+
+interface UserFormData {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  typeUser: string;
+}
 
 interface RegistrationFormProps {
-  onSubmit: (formData: any) => void;
+  onSubmit: (formData: UserFormData) => void;
 }
 
 export function RegistrationForm({ onSubmit }: RegistrationFormProps) {
-  const [formData, setFormData] = useState({
+  const [redirect, setRedirect] = useState(false);
+  
+  const handleNavigate = () => {
+    setRedirect(true); 
+  };
+
+
+  const [formData, setFormData] = useState<UserFormData>({
     name: "",
     email: "",
     password: "",
     passwordConfirm: "",
-    typeUser: "cliente", // Adicionei o campo typeUser com um valor padrão 'funcionario'
+    typeUser: "funcionario", // Valor padrão para typeUser
   });
-
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormSubmitted(true);
+
+    try {
+      const response = await fetch("http://localhost:3000/users/novo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP! Status: ${response.status}`);
+      }
+      handleNavigate();
+      const responseData = await response.json();
+      // Aqui você pode tratar a resposta, se necessário
+      console.log("Resposta do servidor:", responseData);
+
+      // Enviar os dados para o callback onSubmit, se necessário
+      onSubmit(formData);
+    } catch (error) {
+      console.error("Erro ao fazer registro:", error);
+    }
   };
 
-  useEffect(() => {
-    if (formSubmitted) {
-      async function postData() {
-        try {
-          const response = await fetch("http://localhost:3000/users/novo", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-          const data = await response.json();
-          console.log(data);
-        } catch (error) {
-          console.error("Erro ao fazer registro:", error);
-        } finally {
-          setFormSubmitted(false);
-        }
-      }
-
-      if (
-        formData.name &&
-        formData.email &&
-        formData.password &&
-        formData.passwordConfirm &&
-        formData.typeUser
-      ) {
-        console.log(postData);
-
-        postData();
-      }
-    }
-  }, [formSubmitted, formData]);
+  if (redirect) {
+    return <Navigate to="/cardapio" replace />;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

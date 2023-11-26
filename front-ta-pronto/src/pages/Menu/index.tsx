@@ -1,6 +1,9 @@
 import "./index.css";
-import React, { useEffect, useState } from 'react';
-import { OrderListContextProvider, useOrderListContext } from "../../context/OrderListContext";
+import React, { useEffect, useState } from "react";
+import { useOrderListContext } from "../../context/OrderListContext";
+import { BasePage } from "../../components/BasePage";
+import { Fetchs } from "../../components/Fetchs";
+import { MenuFilter } from "../../components/MenuFilter";
 
 interface MenuItem {
   menuId: string;
@@ -20,19 +23,21 @@ export function Menu() {
 
   const handleValueChange = (novoValor: string | string[]) => {
     if (Array.isArray(novoValor)) {
-      const stringSeparatedByComma = novoValor.join(', ');
+      const stringSeparatedByComma = novoValor.join(", ");
       setOrders(stringSeparatedByComma);
     } else {
       setOrders(novoValor);
     }
   };
 
+  //. concluir const datarespone = <Fetchs url="http://localhost:3000/users/menuall" method="GET" />
+
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch('http://localhost:3000/users/menuall');
+        const response = await fetch("http://localhost:3000/users/menuall");
         if (!response.ok) {
-          throw new Error('Erro ao buscar o cardápio');
+          throw new Error("Erro ao buscar o cardápio");
         }
         const data: MenuItem[] = await response.json();
         setMenuItems(data);
@@ -50,7 +55,6 @@ export function Menu() {
 
     fetchMenu();
   }, []);
-
 
   const handleIncrement = (menuId: string, itemName: string) => {
     setCounters((prevCounters) => ({
@@ -98,12 +102,11 @@ export function Menu() {
     }
   };
 
-
   useEffect(() => {
-    localStorage.setItem('selectedItems', JSON.stringify(selectedItems)); //!
+    localStorage.setItem("selectedItems", JSON.stringify(selectedItems)); //!
     // localStorage.setItem('selectedItemNames', JSON.stringify(selectedItemNames)); //!
 
-    const stringSeparatedByComma = selectedItemNames.join(', '); // Converte o array para uma string separada por vírgulas
+    const stringSeparatedByComma = selectedItemNames.join(", "); // Converte o array para uma string separada por vírgulas
     handleValueChange(stringSeparatedByComma); // Chama a função para atualizar os pedidos
 
     console.log(selectedItems);
@@ -111,8 +114,9 @@ export function Menu() {
   }, [selectedItemNames]); // Dispara sempre que há mudanças em selectedItemNames
 
   return (
-    <section className="two">
-      <h2 className="secao">Cardápio</h2>
+    <>
+      <BasePage title={"Cardápio"} subtitle="Escolha sua comida"></BasePage>
+      <MenuFilter></MenuFilter>
       {/* <ValueChanger novoValor={selectedItemNames}></ValueChanger> */}
       <div className="container-two">
         {menuItems.map((item) => (
@@ -122,12 +126,25 @@ export function Menu() {
                 <strong>Nome:</strong> {item.nome} <br />
                 <strong>Ingredientes:</strong> {item.ingredientes} <br />
                 <strong>Descrição:</strong> {item.descricao} <br />
-                <strong>Preço:</strong> R${item.preco.toFixed(2)}
+                <strong>Preço:</strong>{" "}
+                <span className="cardapioPreco">R${item.preco.toFixed(2)}</span>
               </p>
               <div className="tools">
-                <button onClick={() => handleIncrement(item.menuId, item.nome)}>+</button>
-                <span>{counters[item.menuId]}</span>
-                <button onClick={() => handleDecrement(item.menuId, item.nome)}>-</button>
+                <button
+                  className="cardapioBtn"
+                  onClick={() => handleIncrement(item.menuId, item.nome)}
+                >
+                  +
+                </button>
+                <strong>
+                  <span>{counters[item.menuId]}</span>
+                </strong>
+                <button
+                  className="cardapioBtn"
+                  onClick={() => handleDecrement(item.menuId, item.nome)}
+                >
+                  -
+                </button>
               </div>
               <div className="imgCardapio">
                 <img src={item.img} className="imgCardapio" alt="cardapio" />
@@ -136,6 +153,6 @@ export function Menu() {
           </div>
         ))}
       </div>
-    </section>
+    </>
   );
 }

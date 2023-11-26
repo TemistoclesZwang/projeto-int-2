@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { GenQrCode } from "../../components/GenQrCode";
-import "./index.css";
+import  { useState } from "react";
 import { GrayscaleFilterImg } from "../../components/GrayscaleFilterImg";
 import { Countdown } from "../../components/CountDown";
-import { OrderListContextProvider, useOrderListContext } from "../../context/OrderListContext";
+import { useOrderListContext } from "../../context/OrderListContext";
 import { showNotification } from "../../components/SendNotification";
 import { useParams } from "react-router-dom";
+import "./index.css";
 
 export function OrderComp() {
     const { orders } = useOrderListContext();
@@ -28,7 +27,6 @@ export function Pedidos() {
   console.log('valorParametro:', valorParametro);
 
   return (
-    // <OrderListContextProvider>
     <main>
       <section className="first">
         <div className="img-fundo"></div>
@@ -110,6 +108,5 @@ export function Pedidos() {
         </div>
       </section>
     </main>
-    // </OrderListContextProvider>
   );
 }

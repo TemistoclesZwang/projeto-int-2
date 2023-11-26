@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import hourglass from "../../assets/login/pattern.jpeg";
 
 import "./index.css";
-// import { ValueChanger } from "../c3";
-
 
 
 export function LoginForm() {
@@ -35,7 +33,7 @@ export function LoginForm() {
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log('loginform',data);
 
 
       // Define o email no contexto após o login

@@ -25,12 +25,9 @@ export function ProtectedRoute({ element }: ProtectedRouteProps) {
 }
 
 export const MyRouter = (
-  // <AuthProvider>
-  // <OrderListContextProvider>
     <Routes>
       <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
-      {/* <Route path="/pedidos/*" element={<Pedidos />} /> */}
       <Route path="/pedidos/:parametro" element={<Pedidos />} />
       <Route path="/pagamento/*" element={<Pay />} />
       <Route path="*" element={<NotFound />} />
@@ -38,7 +35,4 @@ export const MyRouter = (
       <Route path="/cardapio/*" element={<ProtectedRoute element={<Menu />} />}
       />
     </Routes>
-  // </OrderListContextProvider>
-
-  // </AuthProvider>
 );

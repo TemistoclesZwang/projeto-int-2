@@ -1,31 +1,18 @@
 p{
-    margin: 0;
+    margin: 1rem;
+    font-size: 1.2rem;
 }
 
-.two
-{
-    
-    padding-top: 1rem;
-    padding-bottom: 3rem;
-    /* height: 100vh; */
-    width: 100vw;
-    background-color: white;
-    /* background-color: rgb(57, 96, 87); */
-    
-}
-
-.secao {
-    padding-top: 5rem;
-    /* padding-left: 1rem; */
-    color: rgb(29, 123, 62);
-}
 
 .containerCardapio{
     background-color:cadetblue;
     border-radius: 1rem;
-    max-width: 30rem;
+    /* height: 25rem; */
+    /* width: 20vw; */
+    /* max-width: 90%; */
     margin: 1rem;
-    padding: .5rem;
+    /* padding: .5rem; */
+
 }
 
 .infosCardapio,
@@ -37,20 +24,25 @@ p{
     color: black;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border-radius: 1rem;
+    border-radius: .5rem;
 
 }
 
-.container-two{
+.container-two {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
-
-}
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  
 
 
 .tools{
     color: black;
+}
+
+.cardapioBtn{
+    margin: .5rem;
 }
 
 .text-img-two{
@@ -60,14 +52,22 @@ p{
 }
 
 .imgCardapio {
-    width: 10rem;
-    height: 6rem;
+    width: 15rem;
+    height: 11rem;
     background-color: #f1f1f1;
 }
 
+.cardapioPreco{
+    color: orange;
+    background-color: black;
+    font-weight: 900;
+    border-radius: 2rem;
+    padding: .2rem;
+}
 
 
 @media screen and (min-width: 790px) {
+    /* .grande */
     .two {
         height: none;
     }
@@ -83,6 +83,14 @@ p{
         /* display: grid; */
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+    }
+
+    .containerCardapio{
+        margin: 1rem 1rem;
+        padding: .5rem;
+        display: flex;
+        justify-content:center;
+        /* align-items: center; */
     }
 
 }

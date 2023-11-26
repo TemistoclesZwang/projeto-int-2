@@ -2,22 +2,19 @@ import { GenQrCode } from "../../components/GenQrCode";
 import { CustomContextProvider } from "../../context/c1";
 import { SecondComponent } from "../../context/c2";
 import { Navigate} from "react-router-dom";
-
-import "./index.css";
 import { useState } from "react";
-
-
+import "./index.css";
 
 
 export function Pay() {
   const storedEmail = localStorage.getItem('storedEmail') || 'No email found';
-  const storedItems = localStorage.getItem('selectedItems') || '[]'; // Se nada for encontrado, assume-se um array vazio
+  const storedItems = localStorage.getItem('selectedItems') || '[]';
   const [redirect, setRedirect] = useState(false);
   const parsedStoredItems = JSON.parse(storedItems);
   const menuIdArray = Array.isArray(parsedStoredItems) ? parsedStoredItems : [];
 
   const handleOrders = () => {
-    setRedirect(true); // Ativa o redirecionamento após o login
+    setRedirect(true);
   };
   
 

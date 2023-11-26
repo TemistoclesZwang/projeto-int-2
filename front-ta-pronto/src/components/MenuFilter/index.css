@@ -1,0 +1,16 @@
+.MenuFilterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap:1rem;
+    margin: 1rem;
+}
+
+.MenuFilterIcons{
+    display: flex;
+    flex-direction: row;
+    gap:1rem;
+    
+}
+
