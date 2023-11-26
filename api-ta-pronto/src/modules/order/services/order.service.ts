@@ -33,33 +33,34 @@ export class OrderService {
     private readonly usersRepository: UserRepository,
     private readonly orderRepository: OrderRepository,
   ) {}
-
-  async create(
-    createOrderDto: CreateOrderDto,
-  ): Promise<void> {
-
-    const orderId = generateId();
+  
+  async create(createOrderDto: CreateOrderDto): Promise<void> {
+    const { orderStatus, email, menuId } = createOrderDto;
     const dateHourOrder = getCurrentDateTimeString();
-    const user = await this.usersRepository.findEmail(createOrderDto.email);
-    const orderStatus = createOrderDto.orderStatus
-    const menuId = createOrderDto.menuId
+    const user = await this.usersRepository.findEmail(email);
     const userId = user.id; 
 
-    const order = {
-      orderId,
-      user,
-      userId,
-      menuId,
-      dateHourOrder,
-      orderStatus,
-    };
-    // await this.usersRepository.addOrderToUser(id, orderId);
-    return this.orderRepository.create(order);
+    try {
+      for (const id of menuId) {
+        const orderId = generateId();
+        await this.orderRepository.create({
+          orderId,
+          user,
+          userId,
+          menuId: id, // Passando cada ID como uma string separada
+          dateHourOrder,
+          orderStatus,
+        });
+      }
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao criar o pedido.');
+    }
   }
 
   async findByUserId(userId: string): Promise<Order[]> {
     return this.orderRepository.findByUserId(userId);
   }
+  
 
     // async findAll(): Promise<User[]> {
   //   return this.usersRepository.findAll();

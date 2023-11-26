@@ -1,6 +1,6 @@
 import { JSONSchema } from 'class-validator-jsonschema';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString, Length, IsNumber, IsDate, IsPositive, Validate, ValidationError, ValidateNested } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString, Length, IsNumber, IsDate, IsPositive, Validate, ValidationError, ValidateNested, IsArray } from 'class-validator';
 import { IsValidStatus } from '../decorators/IsValidStatus.decorator';
 import { User } from 'src/modules/user/entities/user.entity';
 
@@ -18,8 +18,9 @@ export class CreateOrderDto {
 
     @ApiProperty({ description: 'Id do prato escolhido no pedido' })
     @IsNotEmpty()
-    @IsString()
-    menuId: string;
+    @IsArray()
+    // @IsString()
+    menuId: string[];
 
     
 }

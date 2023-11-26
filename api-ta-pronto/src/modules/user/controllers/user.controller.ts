@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from '../services/user.service';
 import { UserRepository } from '../repositories/user.repository';
@@ -27,13 +29,23 @@ export class UsersController {
   ) {}
 
   @Post('novo')
-  @ApiOperation({ summary: 'Cria um novo user' }) // Descrição do endpoint
+  @ApiOperation({ summary: 'Cria um novo user' })
   @ApiResponse({ status: 201, description: 'User criado com sucesso' })
   @ApiResponse({ status: 404, description: 'User não foi criado' })
   @ApiBadRequestResponse({ description: 'Requisição inválida' })
   
   async create(@Body() createUserDto: CreateUserDto) {
-    await this.usersService.create(createUserDto);
+    try {
+      await this.usersService.create(createUserDto);
+      return { message: 'User criado com sucesso' };
+    } catch (error) {
+      
+      console.error('Erro ao criar usuário:', error);
+      throw new HttpException(
+        'Erro ao criar usuário',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Patch('update')
