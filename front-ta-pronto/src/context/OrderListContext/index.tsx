@@ -1,8 +1,16 @@
+// OrderListContext.tsx
+
 import React, { createContext, useContext, useState } from 'react';
 
+interface Order {
+  id: string;
+  name: string;
+  count: number; // Adicionando o contador na interface Order
+}
+
 interface OrderListContextProps {
-  orders: string;
-  setOrders: React.Dispatch<React.SetStateAction<string>>;
+  orders: Order[];
+  setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
 }
 
 const OrderListContext = createContext<OrderListContextProps | undefined>(undefined);
@@ -16,11 +24,7 @@ export function useOrderListContext() {
 }
 
 export function OrderListContextProvider({ children }: { children: React.ReactNode }) {
-    const [orders, setOrders] = useState('null');
-    const contextEmail = {
-      orders,
-      setOrders,
-    };
-  
-    return <OrderListContext.Provider value={contextEmail}>{children}</OrderListContext.Provider>;
-  }
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  return <OrderListContext.Provider value={{ orders, setOrders }}>{children}</OrderListContext.Provider>;
+}

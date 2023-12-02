@@ -8,7 +8,13 @@ import "./index.css";
 
 export function OrderComp() {
     const { orders } = useOrderListContext();
-    return <div>Pedidos: {orders}</div>;
+    return <div><ul>
+    {orders.map((order, index) => (
+      <li key={index}>
+        {order.name}
+      </li>
+    ))}
+  </ul></div>;
   }
 
 export function Pedidos() {

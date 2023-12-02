@@ -1,11 +1,15 @@
-import "./index.css";
 import React, { useEffect, useState } from "react";
 import { useOrderListContext } from "../../context/OrderListContext";
 import { BasePage } from "../../components/BasePage";
 import { Fetchs } from "../../components/Fetchs";
 import { MenuFilter } from "../../components/MenuFilter";
+import { MenuItemCard } from "./MenuItemCard";
+import { MenuItemCounter } from "./MenuItemCounter";
+// import { MenuFetcher } from "./MenuFetcher";
+import { MenuViewer } from "./MenuViewer";
+import { MenuFilters } from "./MenuFilters";
 
-interface MenuItem {
+export interface MenuItem {
   menuId: string;
   nome: string;
   ingredientes: string;
@@ -14,23 +18,31 @@ interface MenuItem {
   img: string;
 }
 
-export function Menu() {
-  const { setOrders } = useOrderListContext();
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [counters, setCounters] = useState<{ [menuId: string]: number }>({});
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const [selectedItemNames, setSelectedItemNames] = useState<string[]>([]);
 
-  const handleValueChange = (novoValor: string | string[]) => {
-    if (Array.isArray(novoValor)) {
-      const stringSeparatedByComma = novoValor.join(", ");
-      setOrders(stringSeparatedByComma);
-    } else {
-      setOrders(novoValor);
-    }
-  };
+interface MenuState {
+  menuItems: MenuItem[];
+  counters: { [menuId: string]: number };
+  selectedItems: string[];
+  selectedItemNames: string[];
+}
 
-  //. concluir const datarespone = <Fetchs url="http://localhost:3000/users/menuall" method="GET" />
+export function Menu(): JSX.Element {
+  // const { setOrders } = useOrderListContext();
+  const [menuState, setMenuState] = useState<MenuState>({
+    menuItems: [],
+    counters: {},
+    selectedItems: [],
+    selectedItemNames: [],
+  });
+
+  // const handleValueChange = (novoValor: string | string[]) => {
+  //   if (Array.isArray(novoValor)) {
+  //     const stringSeparatedByComma = novoValor.join(", ");
+  //     setOrders(stringSeparatedByComma);
+  //   } else {
+  //     setOrders(novoValor);
+  //   }
+  // };
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -40,14 +52,15 @@ export function Menu() {
           throw new Error("Erro ao buscar o cardápio");
         }
         const data: MenuItem[] = await response.json();
-        setMenuItems(data);
-
-        // Initialize counters for each menu item
         const initialCounters: { [menuId: string]: number } = {};
         data.forEach((item) => {
           initialCounters[item.menuId] = 0;
         });
-        setCounters(initialCounters);
+        setMenuState({
+          ...menuState,
+          menuItems: data,
+          counters: initialCounters,
+        });
       } catch (error) {
         // Handle error
       }
@@ -57,102 +70,68 @@ export function Menu() {
   }, []);
 
   const handleIncrement = (menuId: string, itemName: string) => {
-    setCounters((prevCounters) => ({
-      ...prevCounters,
-      [menuId]: (prevCounters[menuId] || 0) + 1,
-    }));
-
-    setSelectedItems((prevSelectedItems) => {
-      const updatedItems = [...prevSelectedItems, menuId];
-      return updatedItems;
-    });
-
-    setSelectedItemNames((prevSelectedItems) => {
-      const updatedItems = [...prevSelectedItems, itemName];
-      return updatedItems;
+    setMenuState((prevMenuState) => {
+      const updatedCounters = {
+        ...prevMenuState.counters,
+        [menuId]: (prevMenuState.counters[menuId] || 0) + 1,
+      };
+  
+      return {
+        ...prevMenuState,
+        counters: updatedCounters,
+        selectedItems: [...prevMenuState.selectedItems, menuId],
+        selectedItemNames: [...prevMenuState.selectedItemNames, itemName],
+      };
     });
   };
-
+  
   const handleDecrement = (menuId: string, itemName: string) => {
-    if (counters[menuId] && counters[menuId] > 0) {
-      setCounters((prevCounters) => ({
-        ...prevCounters,
-        [menuId]: prevCounters[menuId] - 1,
-      }));
-
-      setSelectedItems((prevSelectedItems) => {
-        const index = prevSelectedItems.lastIndexOf(menuId);
-        if (index !== -1) {
-          const updatedItems = [...prevSelectedItems];
-          updatedItems.splice(index, 1);
-          return updatedItems;
-        }
-        return prevSelectedItems;
-      });
-
-      setSelectedItemNames((prevSelectedItems) => {
-        const index = prevSelectedItems.lastIndexOf(itemName);
-        if (index !== -1) {
-          const updatedItems = [...prevSelectedItems];
-          updatedItems.splice(index, 1);
-          return updatedItems;
-        }
-        return prevSelectedItems;
-      });
-    }
+    setMenuState((prevMenuState) => {
+      const canDecrement =
+        prevMenuState.counters[menuId] && prevMenuState.counters[menuId] > 0;
+  
+      if (canDecrement) {
+        const updatedCounters = {
+          ...prevMenuState.counters,
+          [menuId]: prevMenuState.counters[menuId] - 1,
+        };
+  
+        const updatedSelectedItems = prevMenuState.selectedItems.filter(
+          (item) => item !== menuId
+        );
+  
+        const updatedSelectedItemNames = prevMenuState.selectedItemNames.filter(
+          (item) => item !== itemName
+        );
+  
+        return {
+          ...prevMenuState,
+          counters: updatedCounters,
+          selectedItems: updatedSelectedItems,
+          selectedItemNames: updatedSelectedItemNames,
+        };
+      }
+      return prevMenuState;
+    });
   };
-
+  
   useEffect(() => {
-    localStorage.setItem("selectedItems", JSON.stringify(selectedItems)); //!
-    // localStorage.setItem('selectedItemNames', JSON.stringify(selectedItemNames)); //!
-
-    const stringSeparatedByComma = selectedItemNames.join(", "); // Converte o array para uma string separada por vírgulas
-    handleValueChange(stringSeparatedByComma); // Chama a função para atualizar os pedidos
-
-    console.log(selectedItems);
-    console.log(selectedItemNames);
-  }, [selectedItemNames]); // Dispara sempre que há mudanças em selectedItemNames
+    localStorage.setItem(
+      "selectedItems",
+      JSON.stringify(menuState.selectedItems)
+    );
+    // const stringSeparatedByComma = menuState.selectedItemNames.join(", ");
+    // handleValueChange(stringSeparatedByComma);
+  }, [menuState.selectedItemNames]);
 
   return (
     <>
+
       <BasePage title={"Cardápio"} subtitle="Escolha sua comida"></BasePage>
-      <MenuFilter></MenuFilter>
-      {/* <ValueChanger novoValor={selectedItemNames}></ValueChanger> */}
-      <div className="container-two">
-        {menuItems.map((item) => (
-          <div className="containerCardapio" key={item.menuId}>
-            <div className="infosCardapio">
-              <p className="pratos">
-                <strong>Nome:</strong> {item.nome} <br />
-                <strong>Ingredientes:</strong> {item.ingredientes} <br />
-                <strong>Descrição:</strong> {item.descricao} <br />
-                <strong>Preço:</strong>{" "}
-                <span className="cardapioPreco">R${item.preco.toFixed(2)}</span>
-              </p>
-              <div className="tools">
-                <button
-                  className="cardapioBtn"
-                  onClick={() => handleIncrement(item.menuId, item.nome)}
-                >
-                  +
-                </button>
-                <strong>
-                  <span>{counters[item.menuId]}</span>
-                </strong>
-                <button
-                  className="cardapioBtn"
-                  onClick={() => handleDecrement(item.menuId, item.nome)}
-                >
-                  -
-                </button>
-              </div>
-              <div className="imgCardapio">
-                <img src={item.img} className="imgCardapio" alt="cardapio" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* <MenuFilter></MenuFilter> */}
+      <MenuViewer></MenuViewer>
+      {/* <MenuFetcher></MenuFetcher> */}
+
     </>
   );
 }
