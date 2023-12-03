@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchMenuData, MenuItem } from './MenuFetcher';
 import { CounterBtn } from './CounterBtn';
 import { MenuFilters } from './MenuFilters';
+import { AddCartBtn } from './AddCartBtn';
 
 export function MenuViewer(): JSX.Element {
   const [menuData, setMenuData] = useState<MenuItem[]>([]);
@@ -31,7 +32,7 @@ export function MenuViewer(): JSX.Element {
             <strong>Descrição:</strong> {item.descricao}<br />
             <strong>Preço:</strong> R${item.preco.toFixed(2)}<br />
             <img src={item.img} alt={item.nome} style={{ maxWidth: '100px' }} /><br />
-            <CounterBtn id={item.menuId} name={item.nome} />
+            <AddCartBtn id={item.menuId} name={item.nome}></AddCartBtn>
           </li>
         ))}
       </ul>

@@ -1,12 +1,26 @@
 
 /* p{
     color: black;
-} */
-.containerQrCode{
-    display: flex;
-    justify-content: center;
-    margin-top: 5rem;
+} */.payContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5rem;
+}
 
+.payList {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adiciona margem entre os pedidos */
+}
+
+.orderName {
+  margin-right: 10px; /* Adiciona espaço à direita do order.name */
+}
+
+.counterBtn {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o CounterBtn */
 }
 
 .Titulo{

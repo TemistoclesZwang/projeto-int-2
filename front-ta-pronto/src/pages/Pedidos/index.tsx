@@ -4,18 +4,13 @@ import { Countdown } from "../../components/CountDown";
 import { useOrderListContext } from "../../context/OrderListContext";
 import { showNotification } from "../../components/SendNotification";
 import { useParams } from "react-router-dom";
+import { useOrderList } from "../../hooks/useOrderList";
 import "./index.css";
+import { useUniqueOrderNames } from "../../hooks/useUniqueName";
+import { BasePage } from "../../components/BasePage";
+import { useRenderUniqueOrdersNames } from "../../hooks/useRenderUniqueOrdersNames";
 
-export function OrderComp() {
-    const { orders } = useOrderListContext();
-    return <div><ul>
-    {orders.map((order, index) => (
-      <li key={index}>
-        {order.name}
-      </li>
-    ))}
-  </ul></div>;
-  }
+
 
 export function Pedidos() {
 
@@ -23,7 +18,7 @@ export function Pedidos() {
   const [timerEnded, setTimerEnded] = useState(false);
   const { parametro }: { parametro?: string } = useParams();
   const valorParametro = parametro === 'true';
-
+  const { uniqueOrdersList } = useRenderUniqueOrdersNames();
 
   const handleTimerEnd = () => {
     setTimerEnded(true);
@@ -34,10 +29,11 @@ export function Pedidos() {
 
   return (
     <main>
+      <BasePage title={"Pedidos"} subtitle={"Veja seus pedidos:"}></BasePage>
       <section className="first">
         <div className="img-fundo"></div>
         <div className="textos-principais">
-          <h1 className="titulo-principal">Tempo do pedido</h1>
+          <h3 className="titulo-principal">Tempo do pedido</h3>
         </div>
         <div className="conteudo-container">
           <div className="botao-principal">
@@ -52,8 +48,11 @@ export function Pedidos() {
                 <div>Tá pronto!</div>
               )}
             </div>
-            <div className="detalhesPedido">Detalhes do pedido:</div>
-            <OrderComp></OrderComp>
+            <p>Detalhes do pedido:</p>
+
+            <div className="detalhesPedido">
+              <div>{uniqueOrdersList}</div>
+            </div>
 
             <GrayscaleFilterImg isColored={timerEnded}></GrayscaleFilterImg>
           </div>

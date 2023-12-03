@@ -1,11 +1,9 @@
-// OrderListContext.tsx
-
 import React, { createContext, useContext, useState } from 'react';
 
 interface Order {
   id: string;
   name: string;
-  count: number; // Adicionando o contador na interface Order
+  count?: number; // Adicionando o campo count à interface Order
 }
 
 interface OrderListContextProps {

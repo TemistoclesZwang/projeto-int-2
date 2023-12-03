@@ -9,7 +9,7 @@ body {
 }
 
 p {
-    color: aliceblue;
+    color: rgb(0, 0, 0);
 }
 
 .first,
@@ -106,7 +106,9 @@ p {
 }
 
 .detalhesPedido{
-    color: black;
+    display: flex;
+    gap: 1rem;
+    /* color: black; */
 }
 
 .img-my-mark{
