@@ -3,94 +3,61 @@ p{
     font-size: 1.2rem;
 }
 
+ul.mainContainer {
+    list-style: none;
+    margin: 1rem; /* Remover a margem para zero */
+    padding: 0; /* Remover o preenchimento para zero */
 
-.containerCardapio{
-    background-color:cadetblue;
-    border-radius: 1rem;
-    /* height: 25rem; */
-    /* width: 20vw; */
-    /* max-width: 90%; */
-    margin: 1rem;
-    /* padding: .5rem; */
-
-}
-
-.infosCardapio,
-.imgCardapio {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: black;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-radius: .5rem;
-
-}
-
-.container-two {
-    display: grid;
-    grid-template-columns: 1fr;
-    max-width: 80%;
-    margin: 0 auto;
   }
-  
 
-
-.tools{
-    color: black;
+.mainContainer{
+    max-width: 100vw;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
 }
+    .containerItemsMenu img {
+    max-width: 350px;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
 
-.cardapioBtn{
-    margin: .5rem;
-}
-
-.text-img-two{
+    }
+    
+    .containerDescriptionMenu {
+    /* margin-bottom: 2rem; */
+        /* max-width: 30vw; */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    flex-direction: column;
+    justify-content: center;
 
-.imgCardapio {
-    width: 15rem;
-    height: 11rem;
-    background-color: #f1f1f1;
-}
-
-.cardapioPreco{
-    color: orange;
-    background-color: black;
-    font-weight: 900;
-    border-radius: 2rem;
-    padding: .2rem;
-}
-
-
-@media screen and (min-width: 790px) {
-    /* .grande */
-    .two {
-        height: none;
+    /* align-items: center; */
+    /* gap: rem; */
     }
 
-    .img-two {
-        height: 5rem;
-        width: 15rem;
-        background-color: rgb(0, 245, 253);
-        border-radius: 1rem;
-    }
+    
 
-    .container-two{
-        /* display: grid; */
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+    @media (min-width: 768px) {
+/*. grande */
+    .containerItemsMenu {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Duas colunas */
+        gap: 4rem; 
+        
     }
-
-    .containerCardapio{
-        margin: 1rem 1rem;
-        padding: .5rem;
-        display: flex;
-        justify-content:center;
-        /* align-items: center; */
+    
+    .containerItemsMenu img {
+        max-width: 370px; /* Redefinir a largura da imagem para ocupar o espaço disponível */
+        margin-right: 0;
+        margin-top: 2rem;
+        
     }
+    
+    .containerDescriptionMenu {
+        max-width: none; /* Redefinir a largura máxima */
+        width: 500px;
+        /* height: 350px; */
 
-}
+    }
+    }
+    

@@ -35,14 +35,6 @@ export function Menu(): JSX.Element {
     selectedItemNames: [],
   });
 
-  // const handleValueChange = (novoValor: string | string[]) => {
-  //   if (Array.isArray(novoValor)) {
-  //     const stringSeparatedByComma = novoValor.join(", ");
-  //     setOrders(stringSeparatedByComma);
-  //   } else {
-  //     setOrders(novoValor);
-  //   }
-  // };
 
   useEffect(() => {
     const fetchMenu = async () => {
