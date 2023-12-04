@@ -1,8 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-// import { UsersService } from '../users/users.service';
 import { UsersService } from '../user/services/user.service';
 import { JwtService } from '@nestjs/jwt';
-const bcrypt = require('bcrypt');
+import { randomBytes, createHash, createVerify } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -20,19 +19,35 @@ export class AuthService {
     if (user?.email !== email) {
       throw new UnauthorizedException();
     }
-    const isPasswordValid = await bcrypt.compare(pass, user.hashPass);
+    const isPasswordValid = await this.verifyPassword(pass, user.hashPass);
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Credenciais inválidas');
     }
-    console.log('user retornado pelo findemail:',user);
+    console.log('user retornado pelo findemail:', user);
     
     const payload = { sub: user.email };
     return {
       access_token: await this.jwtService.sign(payload, {
         secret: this.secretOrPrivateKey,
-        expiresIn:'2h',
+        expiresIn: '2h',
       }),
     };
+  }
+
+  async verifyPassword(plaintextPassword: string, hashedPassword: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      // Obter o salt do hash armazenado no banco de dados (se necessário)
+
+      // Gerar o hash do plaintextPassword
+      const hash = createHash('sha256');
+      hash.update(plaintextPassword);
+
+      // Obter o hash final em formato hexadecimal
+      const hashedInputPassword = hash.digest('hex');
+      
+      // Comparar os hashes
+      resolve(hashedInputPassword === hashedPassword);
+    });
   }
 }
