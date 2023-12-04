@@ -5,6 +5,7 @@ import { CreateUserDto } from '../DTO/create-user.dto';
 import { UpdateUserDto } from '../DTO/update-user.dto';
 import { v4 as uuid } from 'uuid';
 // import bcrypt from "bcrypt";
+import { randomBytes, createHash } from 'crypto';
 
 function generateId():string{
   return uuid()
@@ -13,17 +14,23 @@ function generateId():string{
 const myPlaintextPassword = '123';
 
 
-// function generateHash(plaintextPassword: string): Promise<string> {
-//   return new Promise((resolve, reject) => {
-//       bcrypt.hash(plaintextPassword, 2, (err, hash) => {
-//         if (err) {
-//           reject(err);
-//         }
-//         resolve(hash);
-//       });
+function generateHash(plaintextPassword: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    // Gerar um salt aleatório usando randomBytes
+    const salt = randomBytes(16).toString('hex');
 
-//   });
-// }
+    // Criar um hash usando createHash com o algoritmo 'sha256'
+    const hash = createHash('sha256');
+
+    // Adicionar o salt ao hash e gerar o hash final
+    hash.update(plaintextPassword + salt);
+
+    // Obter o hash final em formato hexadecimal
+    const hashedPassword = hash.digest('hex');
+    
+    resolve(hashedPassword);
+  });
+}
 
 
 @Injectable()
@@ -31,16 +38,22 @@ export class UsersService {
   constructor(private readonly usersRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto): Promise<void> {
- 
+    generateHash(myPlaintextPassword)
+    .then((hash) => {
       const id = generateId();
       const user = {
         ...createUserDto,
         id,
-        hashPass: 'tete', 
+        hashPass: hash, 
       };
 
       return this.usersRepository.create(user);
-  
+    })
+    .catch((error) => {
+      console.error('Erro ao gerar o hash:', error);
+    });
+
+
   }
 
   async update(updateUserDto:UpdateUserDto): Promise<User> {
