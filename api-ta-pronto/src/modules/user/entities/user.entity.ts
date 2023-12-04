@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Order } from '@prisma/client';
 
 export class User {
   @ApiProperty()

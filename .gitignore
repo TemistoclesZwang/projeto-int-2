@@ -43,3 +43,5 @@ front-ta-pronto/front-ta-pronto/src/notes.md
 front-ta-pronto/src/notes.md
 *js.map
 api-ta-pronto/dist
+api-ta-pronto/node_modules
+api-ta-pronto/node_modules/yargs/locales/fr.json
