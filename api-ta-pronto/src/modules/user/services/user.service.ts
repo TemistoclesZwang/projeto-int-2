@@ -4,7 +4,7 @@ import { User } from '../entities/user.entity';
 import { CreateUserDto } from '../DTO/create-user.dto';
 import { UpdateUserDto } from '../DTO/update-user.dto';
 import { v4 as uuid } from 'uuid';
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 
 function generateId():string{
   return uuid()
