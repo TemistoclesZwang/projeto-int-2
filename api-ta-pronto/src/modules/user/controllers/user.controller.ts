@@ -33,13 +33,11 @@ export class UsersController {
   @ApiResponse({ status: 201, description: 'User criado com sucesso' })
   @ApiResponse({ status: 404, description: 'User não foi criado' })
   @ApiBadRequestResponse({ description: 'Requisição inválida' })
-  
   async create(@Body() createUserDto: CreateUserDto) {
     try {
       await this.usersService.create(createUserDto);
       return { message: 'User criado com sucesso' };
     } catch (error) {
-      
       console.error('Erro ao criar usuário:', error);
       throw new HttpException(
         'Erro ao criar usuário',
@@ -63,17 +61,15 @@ export class UsersController {
   remove(@Param('email') email: string) {
     return this.usersService.remove(email);
   }
-}
 
-//   @Get('lista')
-//   @ApiOperation({ summary: 'Lista todos os users' })
-//   @ApiResponse({
-//     status: 200,
-//     description: 'Lista de users retornada com sucesso',
-//   })
-//   findAll() {
-//     return this.usersService.findAll();
-//   }
+  @Get('lista')
+  @ApiOperation({ summary: 'Lista todos os users' })
+  @ApiResponse({ status: 200, description: 'User removido com sucesso' })
+  @ApiResponse({ status: 404, description: 'User não encontrado' })
+  findAll() {
+    return this.usersService.findAll();
+  }
+}
 
 //   @Get('lista/:id')
 //   @ApiOperation({ summary: 'Retorna um user pelo ID' })
@@ -82,6 +78,3 @@ export class UsersController {
 //   findOne(@Param('id') id: string) {
 //     return this.usersService.findOne(+id);
 //   }
-
-
-
