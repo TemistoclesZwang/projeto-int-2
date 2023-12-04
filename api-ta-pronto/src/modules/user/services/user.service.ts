@@ -9,20 +9,21 @@ import { v4 as uuid } from 'uuid';
 function generateId():string{
   return uuid()
 }
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const myPlaintextPassword = '123';
 
-function generateHash(plaintextPassword: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-      bcrypt.hash(plaintextPassword, 2, (err, hash) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(hash);
-      });
 
-  });
-}
+// function generateHash(plaintextPassword: string): Promise<string> {
+//   return new Promise((resolve, reject) => {
+//       bcrypt.hash(plaintextPassword, 2, (err, hash) => {
+//         if (err) {
+//           reject(err);
+//         }
+//         resolve(hash);
+//       });
+
+//   });
+// }
 
 
 @Injectable()
@@ -30,22 +31,16 @@ export class UsersService {
   constructor(private readonly usersRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto): Promise<void> {
-    generateHash(myPlaintextPassword)
-    .then((hash) => {
+ 
       const id = generateId();
       const user = {
         ...createUserDto,
         id,
-        hashPass: hash, 
+        hashPass: 'tete', 
       };
 
       return this.usersRepository.create(user);
-    })
-    .catch((error) => {
-      console.error('Erro ao gerar o hash:', error);
-    });
-
-
+  
   }
 
   async update(updateUserDto:UpdateUserDto): Promise<User> {
