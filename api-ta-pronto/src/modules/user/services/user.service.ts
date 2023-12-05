@@ -17,13 +17,13 @@ const myPlaintextPassword = '123';
 function generateHash(plaintextPassword: string): Promise<string> {
   return new Promise((resolve, reject) => {
     // Gerar um salt aleatório usando randomBytes
-    const salt = randomBytes(16).toString('hex');
+    // const salt = randomBytes(16).toString('hex');
 
     // Criar um hash usando createHash com o algoritmo 'sha256'
     const hash = createHash('sha256');
 
     // Adicionar o salt ao hash e gerar o hash final
-    hash.update(plaintextPassword + salt);
+    hash.update(plaintextPassword);
 
     // Obter o hash final em formato hexadecimal
     const hashedPassword = hash.digest('hex');
