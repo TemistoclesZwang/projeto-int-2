@@ -1,62 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model User {
-  id           String      @id
-  email        String      @unique
-  name         String
-  hashPass     String
-  typeUser     String      @default("cliente")
-  orders       Order[]
+  id       String  @id @db.VarChar(191)
+  email    String  @unique @db.VarChar(191)
+  name     String  @db.VarChar(191)
+  hashPass String  @db.VarChar(191)
+  typeUser String  @db.VarChar(191)
+  orders   Order[]
 }
 
 model Order {
-  orderId      String      @id
-  user         User        @relation(fields: [userId], references: [id])
-  userId       String
-  menuId       String
-  menu         Menu?       @relation(fields: [menuId], references: [menuId])
-  dateHourOrder String
-  orderStatus  String
-}
-
-model Restaurante {
-  id           String      @id
-  nome         String
-  cnpj         String
-  endereco     String
-  telefone     String
-  restauranteId     String
-  menu         Menu[]
+  userId        String @db.VarChar(191)
+  orderId       String @id @db.VarChar(191)
+  dateHourOrder String @db.VarChar(191)
+  orderStatus   String @db.VarChar(191)
+  menuId        String @db.VarChar(191)
+  menu          Menu   @relation(fields: [menuId], references: [menuId])
+  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Menu {
-  menuId       String      @id
-  nome         String
-  ingredientes String
-  descricao    String
-  preco        Float
-  img          String?
-  orders       Order[]
-  restaurante  Restaurante @relation(fields: [restauranteId], references: [id])
-  restauranteId    String
-  promocao     Promocao[]
+  menuId         String           @id @db.VarChar(191)
+  nome           String           @db.VarChar(191)
+  ingredientes   String           @db.VarChar(191)
+  descricao      String           @db.VarChar(191)
+  preco          Float
+  img            String?          @db.VarChar(191)
+  orders         Order[]
+  PromotionMenu  PromotionMenu[]
+  RestaurantMenu RestaurantMenu[]
 }
 
-
-model Promocao {
-  id           String      @id
-  nome         String
-  descricao    String
-  preco        Float
-  img          String?
-  menuId       String
-  menu         Menu[]
+model Promotion {
+  promotionId   String          @id @db.VarChar(191)
+  description   String          @db.VarChar(191)
+  PromotionMenu PromotionMenu[]
 }
 
+model PromotionMenu {
+  promotionId        String    @db.VarChar(191)
+  menuId             String    @db.VarChar(191)
+  discountPercentage Float
+  Menu               Menu      @relation(fields: [menuId], references: [menuId], onDelete: Cascade)
+  Promotion          Promotion @relation(fields: [promotionId], references: [promotionId], onDelete: Cascade)
+
+  @@id([promotionId, menuId])
+}
+
+model Restaurant {
+  restaurantId   String           @id @db.VarChar(191)
+  name           String           @db.VarChar(191)
+  RestaurantMenu RestaurantMenu[]
+}
+
+model RestaurantMenu {
+  restaurantId String     @db.VarChar(191)
+  menuId       String     @db.VarChar(191)
+  Menu         Menu       @relation(fields: [menuId], references: [menuId], onDelete: Cascade)
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [restaurantId], onDelete: Cascade)
+
+  @@id([restaurantId, menuId])
+}

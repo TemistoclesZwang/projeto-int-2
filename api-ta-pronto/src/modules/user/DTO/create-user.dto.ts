@@ -31,6 +31,6 @@ export class CreateUserDto {
     @ApiProperty({ description: 'Tipo de usuário' })
     @IsNotEmpty()
     @IsString()
-    typeUser: string;
+    typeUser: String;
 
 }

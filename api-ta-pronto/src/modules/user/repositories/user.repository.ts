@@ -4,28 +4,36 @@ import { User } from '../entities/user.entity';
 import { PrismaService } from 'src/prisma.service';
 import { v4 as uuid } from 'uuid';
 
+
 function generateId():string{
     return uuid()
     
 }
 
+
 @Injectable()
 export class UserRepository {
     constructor(private readonly prisma: PrismaService) { }
 
-    async create(user: User): Promise<void> {
-        const {name,email,hashPass,typeUser} = user;
+
+    async create(user: {
+        name: string;
+        email: string;
+        hashPass: string;
+        typeUser: string;
+      }): Promise<void> {
+        const { name, email, hashPass, typeUser } = user;
         const id = generateId();
         await this.prisma.user.create({
-            data: {
-                id,
-                name,
-                email,
-                hashPass,
-                typeUser
-            }
+          data: {
+            id,
+            name,
+            email,
+            hashPass,
+            typeUser,
+          },
         });
-    }
+      }
 
     async addOrderToUser(userId: string, orderId: string): Promise<void> { //! não funciona
         const userExists = await this.prisma.user.findUnique({

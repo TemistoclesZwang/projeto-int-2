@@ -38,20 +38,22 @@ export class UsersService {
   constructor(private readonly usersRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto): Promise<void> {
-    generateHash(myPlaintextPassword)
-    .then((hash) => {
-      const id = generateId();
-      const user = {
-        ...createUserDto,
-        id,
-        hashPass: hash, 
-      };
 
-      return this.usersRepository.create(user);
-    })
-    .catch((error) => {
-      console.error('Erro ao gerar o hash:', error);
-    });
+    generateHash(myPlaintextPassword)
+      .then((hash) => {
+        const id = generateId();
+        const user = {
+          ...createUserDto,
+          id,
+          hashPass: hash,
+          typeUser: createUserDto.typeUser.toLowerCase() 
+        };
+
+        return this.usersRepository.create(user);
+      })
+      .catch((error) => {
+        console.error('Erro ao gerar o hash:', error);
+      });
 
 
   }
