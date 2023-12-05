@@ -1,4 +1,9 @@
 export class Menu {
-  menuId?: string //. como só vou buscar não preciso dos outros atributos
+  menuId: string;
+  nome: string;
+  ingredientes: string;
+  descricao: string;
+  preco: number;
+  img: string;
 }
 

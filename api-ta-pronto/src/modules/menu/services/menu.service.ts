@@ -13,6 +13,7 @@ import { v4 as uuid } from 'uuid';
 import { UserRepository } from 'src/modules/user/repositories/user.repository';
 // import { OrderRepository } from '../repositories/menu.repository';
 import { MenuRepository } from '../repositories/menu.repository';
+import { CreateMenuDto } from '../DTO/createMenu.dto';
 function generateId(): string {
   return uuid();
 }
@@ -25,25 +26,27 @@ export class MenuService {
     private readonly menuRepository: MenuRepository,
   ) {}
 
-  // async create(
-  //   createOrderDto: CreateOrderDto,
-  // ): Promise<void> {
+  async create(
+    createMenuDto: CreateMenuDto,
+  ): Promise<void> {
 
-  //   const orderId = generateId();
-  //   const dateHourOrder = getCurrentDateTimeString();
-  //   const user = await this.usersRepository.findEmail(createOrderDto.email);
-  //   const orderStatus = createOrderDto.orderStatus
-
-  //   const id = user.id; 
-  //   const order = {
-  //     orderId,
-  //     user,
-  //     id,
-  //     dateHourOrder,
-  //     orderStatus,
-  //   };
-  //   return this.orderRepository.create(order);
-  // }
+    const menuId = generateId();
+    const nome = createMenuDto.nome;
+    const ingredientes = createMenuDto.ingredientes;
+    const descricao = createMenuDto.descricao;
+    const preco = createMenuDto.preco;
+    const img = createMenuDto.img;
+    
+    const menu = {
+      menuId,
+      nome,
+      ingredientes,
+      descricao,
+      preco,
+      img,
+    };
+    return this.menuRepository.create(menu);
+  }
 
     async findByMenuId(menuId: string): Promise<any[]> {
     return this.menuRepository.findByMenuId(menuId);

@@ -16,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { MenuService } from '../services/menu.service';
 import { MenuRepository } from '../repositories/menu.repository';
+import { CreateMenuDto } from '../DTO/createMenu.dto';
 // import { UpdateUserDto } from '../DTO/update-user.dto';
 
 @Controller('users')
@@ -26,15 +27,15 @@ export class MenuController {
     private menuRepository: MenuRepository,
   ) {}
 
-  // @Post('order')
-  // @ApiOperation({ summary: 'Cria um novo pedido' }) // Descrição do endpoint
-  // @ApiResponse({ status: 201, description: 'Pedido criado com sucesso' })
-  // @ApiResponse({ status: 404, description: 'Pedido não foi criado' })
-  // @ApiBadRequestResponse({ description: 'Requisição inválida' })
+  @Post('menu/create')
+  @ApiOperation({ summary: 'Cria um novo menu' }) // Descrição do endpoint
+  @ApiResponse({ status: 201, description: 'Pedido criado com sucesso' })
+  @ApiResponse({ status: 404, description: 'Pedido não foi criado' })
+  @ApiBadRequestResponse({ description: 'Requisição inválida' })
   
-  // async create(@Body() createOrderDto: CreateOrderDto) {
-  //   await this.orderService.create(createOrderDto);
-  // }
+  async create(@Body() createMenuDto: CreateMenuDto) {
+    await this.menuService.create(createMenuDto);
+  }
 
   @Get('menu/:menuId')
   @ApiOperation({ summary: 'Retorna todos os pedidos através do ID do usuário' })

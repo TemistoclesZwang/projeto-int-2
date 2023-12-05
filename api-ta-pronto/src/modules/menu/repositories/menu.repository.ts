@@ -12,7 +12,24 @@ export class MenuRepository {
     private readonly usersRepository: UserRepository
     ) 
   {}
+  async create(menu: Menu): Promise<void> {
+    const {menuId,nome,ingredientes,descricao,preco,img} = menu;
+    try {
+      await this.prisma.menu.create({
+        data: {
+          menuId,
+          nome,
+          ingredientes,
+          descricao,
+          preco,
+          img
+        },
+      });
 
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao criar o pedido.');
+    }
+  }
   async findByMenuId(menuId: string): Promise<any> { //.corrigir esse tipo
     const menu = await this.prisma.menu.findUnique({
       where: {
