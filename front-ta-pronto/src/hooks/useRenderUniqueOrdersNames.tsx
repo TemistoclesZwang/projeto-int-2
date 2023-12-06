@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useOrderListContext } from '../context/OrderListContext';
-// import { Order } from 'seu/caminho/de/interface'; // Certifique-se de importar corretamente a interface Order
-import { OrderCounter } from '../pages/Menu/OrderCounter';
 import { CounterBtn } from '../pages/Menu/CounterBtn';
 
 interface UseUniqueNamesResult {
   uniqueOrdersList: JSX.Element[];
 }
 
-export function useRenderUniqueOrdersNames(): UseUniqueNamesResult {
+export function useRenderUniqueOrdersNames(showButtons: boolean): UseUniqueNamesResult {
   const { orders } = useOrderListContext();
   const [uniqueOrdersList, setUniqueOrdersList] = useState<JSX.Element[]>([]);
 
@@ -24,7 +22,7 @@ export function useRenderUniqueOrdersNames(): UseUniqueNamesResult {
             {/* <OrderCounter id={orderId} /> */}
             <div className="orderContent">
               <span className="orderName">{uniqueName}</span>
-              <CounterBtn id={orderId} name={uniqueName} />
+              {showButtons && <CounterBtn id={orderId} name={uniqueName} />}
             </div>
           </div>
         </div>
@@ -32,7 +30,7 @@ export function useRenderUniqueOrdersNames(): UseUniqueNamesResult {
     });
 
     setUniqueOrdersList(uniqueOrdersListMapped);
-  }, [orders]);
+  }, [orders, showButtons]);
 
   return { uniqueOrdersList };
 }

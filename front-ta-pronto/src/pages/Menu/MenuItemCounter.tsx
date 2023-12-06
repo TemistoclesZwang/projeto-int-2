@@ -1,5 +1,3 @@
-import React from "react";
-
 interface MenuItemCounterProps {
   menuId: string;
   itemName: string;
@@ -9,8 +7,6 @@ interface MenuItemCounterProps {
 }
 
 export function MenuItemCounter({
-  menuId,
-  itemName,
   counter,
   onIncrement,
   onDecrement,

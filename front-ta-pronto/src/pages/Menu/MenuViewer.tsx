@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchMenuData, MenuItem } from './MenuFetcher';
-import { CounterBtn } from './CounterBtn';
 import { MenuFilters } from './MenuFilters';
 import { AddCartBtn } from './AddCartBtn';
 import './index.css'
@@ -14,7 +13,7 @@ export function MenuViewer(): JSX.Element {
         setMenuData(data);
         setFilteredMenu(data); // Inicialmente, exibimos todos os itens
       })
-      .catch((error) => {
+      .catch(() => {
         // Tratar erro
       });
   }, []);

@@ -1,4 +1,3 @@
-import React from 'react';
 import { RegistrationForm } from '../../components/RegisterForm';
 import { BasePage } from '../../components/BasePage';
 

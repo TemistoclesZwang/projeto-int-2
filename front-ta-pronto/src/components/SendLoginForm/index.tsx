@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useCustomContext } from '../../context/c1';
 import { useAuth } from "../../context/AuthContext";
@@ -24,7 +24,7 @@ export function SendLoginForm() {
   async function postData() {
     
     try {
-      const response = await fetch("http://localhost:3000/auth/signin", {
+      const response = await fetch("https://apitapronto.onrender.com/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,12 +55,12 @@ export function SendLoginForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     postData();
-    localStorage.setItem('storedEmail', email); // Define o email no localStorage
+    localStorage.setItem('storedEmail', email); 
     setNewEmail(email);
   };
 
   useEffect(() => {
-    setDisplayEmail(email); // Atualiza o valor a ser exibido sempre que o email mudar
+    setDisplayEmail(email); 
   }, [email]);
 
   if (redirect) {

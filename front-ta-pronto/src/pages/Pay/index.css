@@ -10,7 +10,7 @@
 .payList {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Adiciona margem entre os pedidos */
+  margin-bottom: 10px;
 }
 
 .orderName {

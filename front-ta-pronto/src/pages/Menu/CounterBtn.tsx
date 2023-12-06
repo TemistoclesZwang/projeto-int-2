@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOrderListContext } from '../../context/OrderListContext';
 
 interface CounterProps {
@@ -38,8 +38,9 @@ export function CounterBtn({ id, name }: CounterProps): JSX.Element {
       <button onClick={handleIncrement}>+</button>
       <span>{count}</span>
       <button onClick={handleDecrement}>-</button>
-      <button onClick={handleClearAllOrders}>Excluir</button>
-      
+      <button onClick={handleClearAllOrders} style={{ background: '#FF6961' }}>
+        Excluir
+      </button>
     </div>
   );
 }

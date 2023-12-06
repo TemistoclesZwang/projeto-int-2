@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useOrderListContext } from "../../context/OrderListContext";
+import { useEffect, useState } from "react";
 import { BasePage } from "../../components/BasePage";
-import { Fetchs } from "../../components/Fetchs";
-import { MenuFilter } from "../../components/MenuFilter";
-import { MenuItemCard } from "./MenuItemCard";
-import { MenuItemCounter } from "./MenuItemCounter";
-// import { MenuFetcher } from "./MenuFetcher";
 import { MenuViewer } from "./MenuViewer";
-import { MenuFilters } from "./MenuFilters";
+
 
 export interface MenuItem {
   menuId: string;
@@ -61,51 +55,6 @@ export function Menu(): JSX.Element {
     fetchMenu();
   }, []);
 
-  const handleIncrement = (menuId: string, itemName: string) => {
-    setMenuState((prevMenuState) => {
-      const updatedCounters = {
-        ...prevMenuState.counters,
-        [menuId]: (prevMenuState.counters[menuId] || 0) + 1,
-      };
-  
-      return {
-        ...prevMenuState,
-        counters: updatedCounters,
-        selectedItems: [...prevMenuState.selectedItems, menuId],
-        selectedItemNames: [...prevMenuState.selectedItemNames, itemName],
-      };
-    });
-  };
-  
-  const handleDecrement = (menuId: string, itemName: string) => {
-    setMenuState((prevMenuState) => {
-      const canDecrement =
-        prevMenuState.counters[menuId] && prevMenuState.counters[menuId] > 0;
-  
-      if (canDecrement) {
-        const updatedCounters = {
-          ...prevMenuState.counters,
-          [menuId]: prevMenuState.counters[menuId] - 1,
-        };
-  
-        const updatedSelectedItems = prevMenuState.selectedItems.filter(
-          (item) => item !== menuId
-        );
-  
-        const updatedSelectedItemNames = prevMenuState.selectedItemNames.filter(
-          (item) => item !== itemName
-        );
-  
-        return {
-          ...prevMenuState,
-          counters: updatedCounters,
-          selectedItems: updatedSelectedItems,
-          selectedItemNames: updatedSelectedItemNames,
-        };
-      }
-      return prevMenuState;
-    });
-  };
   
   useEffect(() => {
     localStorage.setItem(

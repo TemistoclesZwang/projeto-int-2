@@ -1,4 +1,3 @@
-import React from 'react';
 import "./index.css";
 
 // import {LoginForm} from '../../components/LoginForm';
@@ -15,7 +14,6 @@ export function LoginPage() {
       <h2 className='logo'>Tá pronto</h2>
       <SendLoginForm />
       <SecondComponent></SecondComponent>
-      //! até aqui está modificando o email
     </div>
     </CustomContextProvider>
 

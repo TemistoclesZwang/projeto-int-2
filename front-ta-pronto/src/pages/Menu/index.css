@@ -6,10 +6,7 @@ p{
 .containerMenuFilter{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
-    /* margin-left: 3rem; */
-    /* margin-right: 3rem; */
     max-width: 100vw;
 }
 
@@ -63,15 +60,14 @@ justify-content: center;
 
     
 
-    @media (min-width: 768px) {
-/*. grande */
+@media (min-width: 768px) {
+
 
 .containerMenuFilter{
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     justify-content: center;
-    /* margin: 1rem; */
+
 }
     .containerItemsMenu {
         max-width: 100vw;

@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { MyRouter } from "./routes";
 import {
-  faBell,
   faCartShopping,
   faRectangleList,
   faSliders,

@@ -4,11 +4,11 @@ import { LoginPage } from "../pages/Login";
 import { RegistrationPage } from "../pages/Registration";
 import { NotFound } from "../pages/NotFound";
 import { About } from "../pages/About";
-import { AuthProvider, useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { Menu } from "../pages/Menu";
 import { Pedidos } from "../pages/Pedidos";
 import { Pay } from "../pages/Pay";
-import { OrderListContextProvider } from "../context/OrderListContext";
+
 
 interface ProtectedRouteProps {
   element: React.ReactNode;

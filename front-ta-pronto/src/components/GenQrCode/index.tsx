@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import QRCode from "qrcode.react";
 import "./index.css";
 
@@ -9,7 +7,7 @@ export function GenQrCode() {
     // .qr code verifica se é pagamento ou  acompanhar pedido
     <main className="containerQrCode">
       <QRCode
-        value="https://reactjs.org/"
+        value="http://localhost:5173/pedidos/true"
         bgColor="rgb(231, 231, 201)"
         fgColor="rgb(21, 39, 33)"
       />
