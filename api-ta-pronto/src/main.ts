@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   
   const corsOptions: CorsOptions = {
-    origin: ['http://localhost:5173', 'https://front-end-ta-pronto-h1sf9wntl-temistocles-projects.vercel.app'], 
+    origin: ['http://localhost:5173', 'https://front-end-ta-pronto.vercel.app'], 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
