@@ -21,7 +21,7 @@ export function Pay() {
     try {
       const menuIdArray = orders.map((order) => order.id); // Obtendo array de IDs
 
-      const response = await fetch("http://localhost:3000/users/order", {
+      const response = await fetch("https://apitapronto.onrender.com/users/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

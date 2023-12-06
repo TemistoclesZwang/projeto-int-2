@@ -38,7 +38,7 @@ export function RegistrationForm({ onSubmit }: RegistrationFormProps) {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/users/novo", {
+      const response = await fetch("https://apitapronto.onrender.com/users/novo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

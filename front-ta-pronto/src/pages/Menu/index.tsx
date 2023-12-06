@@ -33,7 +33,7 @@ export function Menu(): JSX.Element {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch("http://localhost:3000/users/menuall");
+        const response = await fetch("https://apitapronto.onrender.com/users/menuall");
         if (!response.ok) {
           throw new Error("Erro ao buscar o cardápio");
         }
