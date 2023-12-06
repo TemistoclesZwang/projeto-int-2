@@ -7,7 +7,7 @@ interface GrayscaleFilterImgProps {
 
 export function GrayscaleFilterImg({isColored}: GrayscaleFilterImgProps) {
   return (
-    <div>
+    <div className='containerImgGray'>
       {isColored ? (
         <img 
         src={fastFood} 

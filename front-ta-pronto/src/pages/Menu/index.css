@@ -3,61 +3,94 @@ p{
     font-size: 1.2rem;
 }
 
+.containerMenuFilter{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* margin-left: 3rem; */
+    /* margin-right: 3rem; */
+    max-width: 100vw;
+}
+
+.containerMenuFilter button{
+    margin:.5rem
+}
+.menuItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+
 ul.mainContainer {
     list-style: none;
-    margin: 1rem; /* Remover a margem para zero */
-    padding: 0; /* Remover o preenchimento para zero */
-
+    margin: 1rem; 
+    padding: 0; 
   }
 
 .mainContainer{
-    max-width: 100vw;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
+    margin: 0 auto;
+    width: 90vw;
+
 }
-    .containerItemsMenu img {
-    max-width: 350px;
+
+.containerItemsMenu img {
+    max-width: 250px;
     margin-top: 1rem;
     border-radius: 1rem;
     margin: 1rem;
 
-    }
-    
-    .containerDescriptionMenu {
-    /* margin-bottom: 2rem; */
-        /* max-width: 30vw; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+}
 
-    /* align-items: center; */
-    /* gap: rem; */
+.containerItemsMenu  {
+    max-width: 250px;
+    margin: 1rem;
     }
+
+.itemDescription {
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+    
+.containerDescriptionMenu {
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+}
 
     
 
     @media (min-width: 768px) {
 /*. grande */
+
+.containerMenuFilter{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+    /* margin: 1rem; */
+}
     .containerItemsMenu {
+        max-width: 100vw;
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Duas colunas */
+        grid-template-columns: repeat(3, 1fr); 
         gap: 4rem; 
         
     }
     
     .containerItemsMenu img {
-        max-width: 370px; /* Redefinir a largura da imagem para ocupar o espaço disponível */
+        max-width: 370px; 
         margin-right: 0;
         margin-top: 2rem;
         
     }
     
     .containerDescriptionMenu {
-        max-width: none; /* Redefinir a largura máxima */
+        max-width: none;
         width: 500px;
-        /* height: 350px; */
-
     }
     }
     

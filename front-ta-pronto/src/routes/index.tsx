@@ -26,7 +26,7 @@ export function ProtectedRoute({ element }: ProtectedRouteProps) {
 
 export const MyRouter = (
     <Routes>
-      <Route path="/LoginPage" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/register/*" element={<RegistrationPage />} />
       <Route path="/pedidos/:parametro" element={<Pedidos />} />
       <Route path="/pagamento/*" element={<Pay />} />

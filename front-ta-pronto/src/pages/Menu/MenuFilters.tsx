@@ -27,7 +27,7 @@ export function MenuFilters({ menuData, setFilteredMenu }: MenuFiltersProps): JS
   };
 
   return (
-    <div>
+    <div className='containerMenuFilter'>
       <button onClick={() => filterByPriceRange(10, 20)}>Entre R$10 e R$20</button>
       <button onClick={filterLessThan15}>Menor que R$15</button>
       <button onClick={filterMoreThan20}>Maior que R$20</button>

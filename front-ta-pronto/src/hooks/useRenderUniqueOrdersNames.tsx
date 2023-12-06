@@ -21,12 +21,11 @@ export function useRenderUniqueOrdersNames(): UseUniqueNamesResult {
       return (
         <div key={index} className="payList">
           <div className="counterBtn">
-            <OrderCounter id={orderId} />
-            <CounterBtn
-                id={orderId}
-                name={uniqueName}
-              />
-            <span className="orderName">{uniqueName}</span>
+            {/* <OrderCounter id={orderId} /> */}
+            <div className="orderContent">
+              <span className="orderName">{uniqueName}</span>
+              <CounterBtn id={orderId} name={uniqueName} />
+            </div>
           </div>
         </div>
       );

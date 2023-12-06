@@ -1,7 +1,7 @@
 .BasePageContainer
 {
     padding-top: 1rem;
-    padding-bottom: 3rem;
+    /* padding-bottom: 3rem; */
     background-color: white;
     display: flex;
     justify-content: center;

@@ -1,11 +1,10 @@
-
-/* p{
-    color: black;
-} */.payContainer {
+.payContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin-top: 5rem;
+  align-items: center;
+  gap: 2rem;
 }
 
 .payList {
@@ -15,13 +14,36 @@
 }
 
 .orderName {
-  margin-right: 10px; /* Adiciona espaço à direita do order.name */
+  display: flex;
+  justify-content: center;
 }
 
 .counterBtn {
   display: flex;
-  align-items: center; /* Centraliza verticalmente o CounterBtn */
+  align-items: center;
 }
+.counterBtnContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.counterBtnLine{
+    border: none;
+    border-top: 1px solid #333;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+.orderContent{
+  background-color: rgb(254, 254, 254);
+  border-radius: 1rem;
+  padding: .4rem;
+}
+
 
 .Titulo{
     margin-top: 0;

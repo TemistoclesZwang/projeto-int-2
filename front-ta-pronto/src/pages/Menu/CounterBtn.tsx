@@ -39,6 +39,7 @@ export function CounterBtn({ id, name }: CounterProps): JSX.Element {
       <span>{count}</span>
       <button onClick={handleDecrement}>-</button>
       <button onClick={handleClearAllOrders}>Excluir</button>
+      
     </div>
   );
 }

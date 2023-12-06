@@ -24,10 +24,6 @@ function App() {
             <ul className="links">
               <div className="left">
 
-              <BtnNavBar to="/pedidos" 
-                icon={faUtensils} 
-                text="Home" />
-
                 <BtnNavBar to="/pedidos/false" 
                 icon={faUtensils} 
                 text="Pedidos" />

@@ -48,69 +48,17 @@ export function Pedidos() {
                 <div>Tá pronto!</div>
               )}
             </div>
-            <p>Detalhes do pedido:</p>
 
             <div className="detalhesPedido">
               <div>{uniqueOrdersList}</div>
+            <GrayscaleFilterImg isColored={timerEnded}></GrayscaleFilterImg>
             </div>
 
-            <GrayscaleFilterImg isColored={timerEnded}></GrayscaleFilterImg>
           </div>
         </div>
       </section>
       <section className="two">
-        <h2 className="secao">secao2</h2>
-        <div className="container-two">
-          <div className="content-1">
-            <div className="text-img-two">
-              <p>Texto texto texto texto texto</p>
-              <div className="img-two"></div>
-            </div>
-          </div>
-          <div className="content-2">
-            <div className="text-img-two">
-              <p>Texto texto texto texto texto</p>
-              <div className="img-two"></div>
-            </div>
-          </div>
-          <div className="content-3">
-            <div className="text-img-two">
-              <p>Texto texto texto texto texto</p>
-              <div className="img-two"></div>
-            </div>
-          </div>
-          <div className="content-4">
-            <div className="text-img-two">
-              <p>Texto texto texto texto texto</p>
-              <div className="img-two"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="three">
-        <h2 className="secao">secao3</h2>
-        <div className="container-three">
-          <div className="content-1">
-            <div className="text-img-three">
-              <div className="img-three"></div>
-            </div>
-          </div>
-          <div className="content-2">
-            <div className="text-img-three">
-              <div className="img-three"></div>
-            </div>
-          </div>
-          <div className="content-3">
-            <div className="text-img-three">
-              <div className="img-three"></div>
-            </div>
-          </div>
-          <div className="content-4">
-            <div className="text-img-three">
-              <div className="img-three"></div>
-            </div>
-          </div>
-        </div>
+        <h2 className="secao">Promoções</h2>
       </section>
     </main>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { RegistrationForm } from '../../components/RegisterForm';
+import { BasePage } from '../../components/BasePage';
 
 export function RegistrationPage() {
   const handleSubmit = (formData: any) => {
@@ -8,7 +9,7 @@ export function RegistrationPage() {
 
   return (
     <div>
-      <h1>Registration Page</h1>
+      <BasePage title={'Cadastro'} subtitle={'Faça seu cadastro'}></BasePage>
       <RegistrationForm onSubmit={handleSubmit} />
     </div>
   );
