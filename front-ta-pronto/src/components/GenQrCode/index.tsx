@@ -7,7 +7,7 @@ export function GenQrCode() {
     // .qr code verifica se é pagamento ou  acompanhar pedido
     <main className="containerQrCode">
       <QRCode
-        value="http://localhost:5173/pedidos/true"
+        value="https://apitapronto.onrender/pedidos/true"
         bgColor="rgb(231, 231, 201)"
         fgColor="rgb(21, 39, 33)"
       />
