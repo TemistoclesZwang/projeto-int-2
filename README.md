@@ -1,5 +1,8 @@
 # Projeto Integrador II
 
+## Link do relatório: 
+https://docs.google.com/document/d/1i6RqdcqxwD6z_B7kOok2NXdRbD6GA9pazQgcLieq6gU/edit?usp=sharing
+
 ## I - Nome do Projeto:
 <p align="justify"> Tá pronto</p>
 
